@@ -102,7 +102,7 @@ public class Market{
 			System.out.println(i + ". "+(itemList.get(i)).toStringShopping());
 	}
 
-	public void visitMarket(){
+	public void visitMarket(Hero hero){
 		String mainTipsStr = "What you want to do? [B]Buy   [S]Sell   [L]Leave the market:";
 		Scanner scan = new Scanner(System.in);
 		while(true){
@@ -110,10 +110,10 @@ public class Market{
 			String input = scan.next();
 			if (input.charAt(0) == 'B' || input.charAt(0) == 'b'){
 				//show the second menu of buy.
-				this.buyMainMenu();
+				this.buyMainMenu(hero);
 			}else if (input.charAt(0) == 'S' || input.charAt(0) == 's'){
 				//show the second menu of sell.
-				this.sellMainMenu();
+				this.sellMainMenu(hero);
 			}else if (input.charAt(0) == 'L' || input.charAt(0) == 'l'){
 				//Leave the market.
 				System.out.println("-------------------------------------------------------------------------");
@@ -124,32 +124,33 @@ public class Market{
 		}
 	}
 
-	public void sellMainMenu(){
-		String heroTipsStr = "Choose which heros to sell? [0-"+ ((theHeros.length)-1) + "], press other keys to return:";
+	public void sellMainMenu(Hero hero){
+		// String heroTipsStr = "Choose which heros to sell? [0-"+ ((theHeros.length)-1) + "], press other keys to return:";
 		String errorStr = "Invalid input.";
 		String sellTipsStr = "Which one? [P]Potion  [A]Armor  [W]Weapon  [B]Back to market:";
 		Scanner scan = new Scanner(System.in);
 		while(true){
-			System.out.print(heroTipsStr);
-			if(!(scan.hasNextInt())){
-				return;
-			}
-			int heroNum = scan.nextInt();
-			if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
-				System.out.println(errorStr);
-				continue;
-			}
+			// System.out.print(heroTipsStr);
+			// if(!(scan.hasNextInt())){
+			// 	return;
+			// }
+			// int heroNum = scan.nextInt();
+			// if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
+			// 	System.out.println(errorStr);
+			// 	continue;
+			// }
 			System.out.print(sellTipsStr);
 			String input = scan.next();
 			if (input.charAt(0) == 'P' || input.charAt(0) == 'p'){
 				//Sell potions.
-				theHeros[heroNum].sellItem(2);
+				//theHeros[heroNum].sellItem(2);
+				hero.sellItem(2);
 			}else if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){
 				//Sell armors.
-				theHeros[heroNum].sellItem(1);
+				hero.sellItem(1);
 			}else if (input.charAt(0) == 'W' || input.charAt(0) == 'w'){
 				//Sell weapons.
-				theHeros[heroNum].sellItem(0);
+				hero.sellItem(0);
 			}else if (input.charAt(0) == 'B' || input.charAt(0) == 'b'){
 				return;
 			}else{
@@ -158,7 +159,7 @@ public class Market{
 		}
 	}
 
-	public void buyMainMenu(){
+	public void buyMainMenu(Hero hero){
 		String buyTipsStr = "Which one? [S]Spell  [P]Potion  [A]Armor  [W]Weapon  [B]Back to market:";
 		Scanner scan = new Scanner(System.in);
 		while(true){
@@ -166,16 +167,16 @@ public class Market{
 			String input = scan.next();
 			if (input.charAt(0) == 'S' || input.charAt(0) == 's'){
 				//Buy spells.
-				this.buySpell();
+				this.buySpell(hero);
 			}else if (input.charAt(0) == 'P' || input.charAt(0) == 'p'){
 				//Buy potions.
-				this.buyItem(potionList);
+				this.buyItem(hero,potionList);
 			}else if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){
 				//Buy armors.
-				this.buyItem(armorList);
+				this.buyItem(hero,armorList);
 			}else if (input.charAt(0) == 'W' || input.charAt(0) == 'w'){
 				//Buy weapons.
-				this.buyItem(weaponList);
+				this.buyItem(hero,weaponList);
 			}else if (input.charAt(0) == 'B' || input.charAt(0) == 'b'){
 				return;
 			}else{
@@ -184,9 +185,9 @@ public class Market{
 		}
 	}
 
-	public void buyItem(List<Item> itemList){
+	public void buyItem(Hero hero, List<Item> itemList){
 		String buyTipsStr = "Choose one to buy, using its sequence number [0-" + (itemList.size()-1) + "], press other keys to return:";
-		String heroTipsStr = "Choose which heros to buy? [0-"+ ((theHeros.length)-1) + "], press other keys to return:";
+		// String heroTipsStr = "Choose which heros to buy? [0-"+ ((theHeros.length)-1) + "], press other keys to return:";
 		String errorStr = "Invalid input.";
 		Scanner scan = new Scanner(System.in);
 		while(true){
@@ -200,21 +201,21 @@ public class Market{
 				System.out.println(errorStr);
 				continue;
 			}
-			System.out.print(heroTipsStr);
-			if(!(scan.hasNextInt())){
-				return;
-			}
-			int heroNum = scan.nextInt();
-			if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
-				System.out.println(errorStr);
-				continue;
-			}
+			// System.out.print(heroTipsStr);
+			// if(!(scan.hasNextInt())){
+			// 	return;
+			// }
+			// int heroNum = scan.nextInt();
+			// if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
+			// 	System.out.println(errorStr);
+			// 	continue;
+			// }
 			Item buyItem = itemList.get(buyNum);
-			if(this.heroBuyItem(theHeros[heroNum], buyItem)){
-				System.out.println(theHeros[heroNum].getName() + " buy " + buyItem.getName() + "!");
-				theHeros[heroNum].addMoney(-1*buyItem.getPrice());
+			if(this.heroBuyItem(hero, buyItem)){
+				System.out.println(hero.getName() + " buy " + buyItem.getName() + "!");
+				hero.addMoney(-1*buyItem.getPrice());
 				itemList.remove(buyNum);
-				buyItem.addToHero(theHeros[heroNum]);				
+				buyItem.addToHero(hero);				
 			}
 			System.out.println("-------------------------------------------------------------------------");
 			continue;
@@ -241,11 +242,11 @@ public class Market{
 		return true;
 	}
 
-	public void buySpell(){
+	public void buySpell(Hero hero){
 		String buySpellTipsStr;
 		String errorStr = "Invalid input.";
 		Scanner scan = new Scanner(System.in);
-		String heroTipsStr = "Choose which heros to learn? [0-"+ ((theHeros.length)-1) + "], press other keys to return:";
+		//String heroTipsStr = "Choose which heros to learn? [0-"+ ((theHeros.length)-1) + "], press other keys to return:";
 		while(true){
 			if (spellList.size() == 0){
 				//No spell in the spellList.
@@ -263,20 +264,20 @@ public class Market{
 				System.out.println(errorStr);
 				continue;
 			}
-			System.out.print(heroTipsStr);
-			while(!(scan.hasNextInt())){
-				return;
-			}
-			int heroNum = scan.nextInt();
-			if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
-				System.out.println(errorStr);
-				continue;
-			}
+			// System.out.print(heroTipsStr);
+			// while(!(scan.hasNextInt())){
+			// 	return;
+			// }
+			// int heroNum = scan.nextInt();
+			// if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
+			// 	System.out.println(errorStr);
+			// 	continue;
+			// }
 			Spell buySpell = spellList.get(buyNum);
-			if(this.heroBuySpell(theHeros[heroNum],buySpell)){
-				System.out.println(theHeros[heroNum].getName() + " learned " + buySpell.getName() + "!");
-				theHeros[heroNum].addMoney(-1*buySpell.getPrice());
-				theHeros[heroNum].learnSpell(buySpell);
+			if(this.heroBuySpell(hero,buySpell)){
+				System.out.println(hero.getName() + " learned " + buySpell.getName() + "!");
+				hero.addMoney(-1*buySpell.getPrice());
+				hero.learnSpell(buySpell);
 				//theHeros[heroNum].showLearnedSpell();
 				spellList.remove(buyNum);				
 			}

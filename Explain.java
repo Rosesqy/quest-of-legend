@@ -15,7 +15,7 @@ public class Explain{
         for(String l:list){
             try{
                 System.out.println("\nAvailable "+l);
-                File info = new File( path + "info/"+l+".txt");
+                File info = new File( path + "the_Quest/"+l+".txt");
                 Scanner reader = new Scanner(info);
                 System.out.println(reader.nextLine());
                 while(reader.hasNextLine()){
@@ -70,7 +70,7 @@ public class Explain{
         for(String l:productlist){
             try{
                 
-                File info = new File( path + "info/"+l+".txt");
+                File info = new File( path + "the_Quest/"+l+".txt");
                 Scanner reader = new Scanner(info);
                 reader.nextLine();
                 while(reader.hasNextLine()){
@@ -113,7 +113,7 @@ public class Explain{
 
         for(String l:monsterlist){
             try{
-                File info = new File( path + "info/"+l+".txt");
+                File info = new File( path + "the_Quest/"+l+".txt");
                 Scanner reader = new Scanner(info);
                 reader.nextLine();
                 while(reader.hasNextLine()){

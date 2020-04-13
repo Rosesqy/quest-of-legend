@@ -40,7 +40,7 @@ public abstract class Hero extends Creatures{
 		defense = 0;
 		weaponDamage = 0;
 		heroIdx = hIdx;
-		// x = 0;
+		x = 7;
 		// y = 0;
 	}
 
