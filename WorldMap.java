@@ -76,7 +76,7 @@ public class WorldMap{
 			for (int j = 0; j < size ; j++){
 				if (( j%8 == 2 )||( j%8 == 5))
 					mapCell[i][j] = new Block();
-				else if(( i < 8 )||( i > 55))
+				else if(( i ==7 )||( i ==0))
 					mapCell[i][j] = new Nexus();
 				else {
 					double tmp = Math.random();
