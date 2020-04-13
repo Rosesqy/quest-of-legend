@@ -118,7 +118,6 @@ public class Quest{
 		thePub = new Pub();
 		theHeros = thePub.generateHero(heroNum);
 
-
 		// ArrayList<Hero> allheroes = new ArrayList<Hero>();
 		// System.out.println("\nchoose your 3 heroes");
 		// Explain.showHero(allheroes);
@@ -154,9 +153,6 @@ public class Quest{
 		// Explain.showTeam(team.getTeam());
 		// theHeros = team.getTeam().toArray(theHeros);
 
-		
-		// Hero[] temp= {new Warrior("Solonor_Thelandira",300,750,650,700,2500,7,0),new Warrior("test2",300,750,700,600,2500,7,0),new Warrior("test3",250,650,600,350,2500,4,0)};
-		// theHeros = temp;
 
 		// for(int i = 0; i < heroNum; i++){
 		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
