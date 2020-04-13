@@ -167,34 +167,5 @@ public class WorldMap{
 	}
 	
 
-	// public void showMap(int xPos, int yPos){
-	// 	String line = "";
-	// 	String middle = "";
-	// 	//System.out.println(mapEdge);
-	// 	for (int i = 0; i < size; i++){
-	// 		line = "";
-	// 		middle = "";
-	// 		for (int j = 0; j < size; j ++){
-	// 			line = line + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + "  ";
-	// 			if (mapCell[i][j].getLabel() == "I")
-	// 				middle = middle + "| X X X |  ";
-	// 			else{
-	// 				if(mapCell[i][j].getIsHero()>0)
-	// 					middle  = middle + "| H" + mapCell[i][j].getIsHero() + " ";
-	// 				else
-	// 					middle = middle + "|    ";
-	// 				middle = middle + "   |  ";
-	// 			}
-	// 			// if (i == xPos && j == yPos)
-	// 			// 	line = line + mapCell[i][j].getLabel() + "H|";
-	// 			// else
-	// 				//line = line + mapCell[i][j].getLabel() + " |";
-	// 		}
-				
-	// 		System.out.println(line);
-	// 		System.out.println(middle);
-	// 		System.out.println(line);
-	// 		System.out.print("\n");
-	// 	}
-	// }
+	
 }
