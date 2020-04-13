@@ -10,8 +10,10 @@ public class Fight{
 	int highestLevel;
 	int continueFlag; // "2" represents fight continue, "1" means heros win, "0" means monsters win. 
 	Abyss theAbyss;
+
 	Hero singleHero;
 	Monster singleMonster;
+
 	// Fight(Hero[] heros, Abyss abyss){
 	// //Generate the monsters.
 

@@ -530,6 +530,7 @@ public class Quest{
 			h.getRevived();
 			h.setHeroPosition(theMap, 7, (h.getHeroIdx()-1)*3);
 		}
+
 	}
 
 	public void visitMarket(Hero hero){
