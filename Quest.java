@@ -59,7 +59,7 @@ public class Quest{
 			for(Hero h:theHeros){
 				if(checkFight(m,h)){
 					infight = true;
-					startFight();
+					startFight(m,h);
 				}
 			}
 			if(!infight){
@@ -447,8 +447,8 @@ public class Quest{
 		return false;
 	}
 
-	public void startFight(){
-		theFight = new Fight(theHeros, theAbyss);
+	public void startFight(Monster m, Hero h){
+		theFight = new Fight(h,m);
 		theFight.singleFight();
 	}
 

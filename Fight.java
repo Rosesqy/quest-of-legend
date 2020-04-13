@@ -10,28 +10,32 @@ public class Fight{
 	int highestLevel;
 	int continueFlag; // "2" represents fight continue, "1" means heros win, "0" means monsters win. 
 	Abyss theAbyss;
-	Fight(Hero[] heros, Abyss abyss){
-	//Generate the monsters.
+	// Fight(Hero[] heros, Abyss abyss){
+	// //Generate the monsters.
 
-		theHeros = heros;
-		theAbyss = abyss;
-		vsNum = theHeros.length;
-		highestLevel = theHeros[0].getLevel();
-		for(int i = 1; i < vsNum ; i ++ ){
-			if( theHeros[i].getLevel() > highestLevel )
-				highestLevel = theHeros[i].getLevel();
-		}
+	// 	theHeros = heros;
+	// 	theAbyss = abyss;
+	// 	vsNum = theHeros.length;
+	// 	highestLevel = theHeros[0].getLevel();
+	// 	for(int i = 1; i < vsNum ; i ++ ){
+	// 		if( theHeros[i].getLevel() > highestLevel )
+	// 			highestLevel = theHeros[i].getLevel();
+	// 	}
 		
-		heroSurvive = new int[vsNum];
-		monsterSurvive = new int[vsNum];
-		for(int i = 0; i < vsNum ; i ++ ){
-			heroSurvive[i] = (theHeros[i].getHp() == 0)?0:1;
-			monsterSurvive[i] = 1;
-		}
-		theMonsters = theAbyss.generateMonster(vsNum, highestLevel);
-		// theMonsters = new Monster[vsNum];
+	// 	heroSurvive = new int[vsNum];
+	// 	monsterSurvive = new int[vsNum];
+	// 	for(int i = 0; i < vsNum ; i ++ ){
+	// 		heroSurvive[i] = (theHeros[i].getHp() == 0)?0:1;
+	// 		monsterSurvive[i] = 1;
+	// 	}
+	// 	theMonsters = theAbyss.generateMonster(vsNum, highestLevel);
+	// 	// theMonsters = new Monster[vsNum];
 		
-		continueFlag = 2;
+	// 	continueFlag = 2;
+	// }
+
+	public Fight(Hero hero, Monster monster){
+		
 	}
 
 	public void showStatus(){
