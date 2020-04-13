@@ -470,12 +470,12 @@ public class Quest{
 		return false;
 	}
 
-	public boolean checkMarket(){
-		if(herosMove && theMap.getCellLabel(xPosNow, yPosNow)=="M"){
-			return true;
-		}
-		return false;
-	}
+	// public boolean checkMarket(){
+	// 	if(herosMove && theMap.getCellLabel(xPosNow, yPosNow)=="M"){
+	// 		return true;
+	// 	}
+	// 	return false;
+	// }
 
 	public boolean checkWinEnding(){
 		//Check whether a hero or a monster reach the opposite nexus.

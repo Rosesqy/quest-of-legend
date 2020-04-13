@@ -66,7 +66,18 @@ public abstract class Hero extends Creatures{
 			this.agility += this.agility*0.1;
 		}else if(celltype.equals("K")){
 			this.strength += this.strength*0.1;
+		}else if(celltype.equals("N")){
+			goMarket();
 		}
+	}
+
+	public void goMarket(){
+		
+		System.out.print("Build the market...");
+		Market theMarket = new Market(this);
+		System.out.println("done.");
+		theMarket.visitMarket(this);
+	
 	}
 
 	public void leaveHeroPosition(WorldMap theMap){
