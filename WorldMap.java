@@ -47,29 +47,51 @@ public class WorldMap{
 		System.out.print("Create the world...");
 		mapCell = new Cell [size][size];
 		int totalSize = size*size;
-		List <String> labelCell = new ArrayList<String>();
-		for(int i = 0; i < totalSize; i++){
-			if (( i%8 == 2 )||( i%8 == 5))
-				labelCell.add("I");
-			else if(( i < 8 )||( i > 55))
-				labelCell.add("N");
-			else {
-				double tmp = Math.random();
-				if (tmp < commonCellRate)
-					labelCell.add("P");
-				else if (tmp < (commonCellRate + bushCellRate))
-					labelCell.add("B");
-				else if (tmp < (commonCellRate + bushCellRate + koulouCellRate))
-					labelCell.add("K");
-				else
-					labelCell.add("C");
-			}
-		}
+		// List <String> labelCell = new ArrayList<String>();
+		// for(int i = 0; i < totalSize; i++){
+		// 	if (( i%8 == 2 )||( i%8 == 5))
+		// 		labelCell.add("I");
+		// 	else if(( i < 8 )||( i > 55))
+		// 		labelCell.add("N");
+		// 	else {
+		// 		double tmp = Math.random();
+		// 		if (tmp < commonCellRate)
+		// 			labelCell.add("P");
+		// 		else if (tmp < (commonCellRate + bushCellRate))
+		// 			labelCell.add("B");
+		// 		else if (tmp < (commonCellRate + bushCellRate + koulouCellRate))
+		// 			labelCell.add("K");
+		// 		else
+		// 			labelCell.add("C");
+		// 	}
+		// }
+		// for (int i = 0; i < size ; i++){
+		// 	for (int j = 0; j < size ; j++){
+		// 		mapCell[i][j] = new Cell(labelCell.get(size*i+j));
+		// 	}
+		// }
+		
+		
 		for (int i = 0; i < size ; i++){
 			for (int j = 0; j < size ; j++){
-				mapCell[i][j] = new Cell(labelCell.get(size*i+j));
+				if (( j%8 == 2 )||( j%8 == 5))
+					mapCell[i][j] = new Block();
+				else if(( i ==7 )||( i ==0))
+					mapCell[i][j] = new Nexus();
+				else {
+					double tmp = Math.random();
+					if (tmp < commonCellRate)
+						mapCell[i][j] = new Cell();
+					else if (tmp < (commonCellRate + bushCellRate))
+						mapCell[i][j] = new Bush();
+					else if (tmp < (commonCellRate + bushCellRate + koulouCellRate))
+						mapCell[i][j] = new Koulo();
+					else
+						mapCell[i][j] = new Cave();
+				}
 			}
 		}
+
 		System.out.println("done.");
 	}
 
@@ -129,7 +151,10 @@ public class WorldMap{
 				if (mapCell[i][j].getLabel() == "I")
 					middle = middle + "| X X X |  ";
 				else{
-					if(mapCell[i][j].getIsHero()>0){
+					if(mapCell[i][j].getIsHero()>0 && mapCell[i][j].getIsMonster()>0){
+						middle = middle + "|H" + mapCell[i][j].getIsHero() + "M"+mapCell[i][j].getIsMonster();
+					}
+					else if(mapCell[i][j].getIsHero()>0){
 						middle  = middle + "| H" + mapCell[i][j].getIsHero() + " ";
 					}else if(mapCell[i][j].getIsMonster()>0){
 						middle  = middle + "| M" + mapCell[i][j].getIsMonster() + " ";

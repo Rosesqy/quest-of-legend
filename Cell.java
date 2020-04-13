@@ -6,7 +6,9 @@ public class Cell {
 	protected int isMonster;//"0" for non hero, 1~n represents a monster.
 
 	public Cell(){
-
+		this.label = "P";
+		isHero = 0;
+		isMonster = 0;
 	}
 
 	public Cell(String str){

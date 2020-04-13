@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Block extends Cell{
     public Block(){
-       this.label = "&";
+       this.label = "I";
     }
 
     @Override
