@@ -120,6 +120,7 @@ public class WorldMap{
 					}
 				}
 				for(int m = 1;m<=monsters.size();m++){
+					// System.out.println(monsters.get(m-1).getX()+monsters.get(m-1).getY());
 					if(monsters.get(m-1).getX()==i && monsters.get(m-1).getY()==j){
 						mapCell[i][j].setIsMonster(m);
 					}

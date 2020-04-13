@@ -94,6 +94,7 @@ public class Quest{
 	public void createMap(){
 		theMap = new WorldMap();
 		theMap.createMap();
+		theMap.showMap(theHeros, theMons);
 	}
 
 	public void createHero(){
@@ -146,8 +147,9 @@ public class Quest{
 		// for(int i = 0; i < heroNum; i++){
 		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
 		// }
-		for(Hero h:theHeros){
-			System.out.println(h);
+		for(int i=0;i<heroNum;i++){
+			System.out.println(theHeros[i]);
+			theHeros[i].setY(i*3);
 		}
 		System.out.println("Join the team.");
 	}
@@ -160,6 +162,7 @@ public class Quest{
 
 	public void showWorld(){
 		// theMap.showMap(xPosNow,yPosNow);
+		
 		theMap.showMap(theHeros, theMons);
 	}
 
@@ -252,7 +255,7 @@ public class Quest{
 
 	public boolean heroAction(Hero hero){
 		//Single action for a hero in one round.
-		theMap.showMap(theHeros,theMons);
+		// theMap.showMap(theHeros,theMons);
 
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";

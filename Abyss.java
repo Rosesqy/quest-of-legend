@@ -66,6 +66,7 @@ public class Abyss{
 				monster[i] = new Spirit(spiritList[level-1].getName(),level,spiritList[level-1].getDamage(),spiritList[level-1].getDefense(),(int)(spiritList[level-1].getDodgeRate()*100));
 			else
 				monster[i] = new Exoskeleton(skeletonList[level-1].getName(),level,skeletonList[level-1].getDamage(),skeletonList[level-1].getDefense(),(int)(skeletonList[level-1].getDodgeRate()*100));
+			monster[i].setY(i*3+1);
 		}
 		return monster;
 	}
