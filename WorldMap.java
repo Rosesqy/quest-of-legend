@@ -74,7 +74,7 @@ public class WorldMap{
 		
 		for (int i = 0; i < size ; i++){
 			for (int j = 0; j < size ; j++){
-				if (( i%8 == 2 )||( i%8 == 5))
+				if (( j%8 == 2 )||( j%8 == 5))
 					mapCell[i][j] = new Block();
 				else if(( i < 8 )||( i > 55))
 					mapCell[i][j] = new Nexus();
