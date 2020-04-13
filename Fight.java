@@ -30,14 +30,7 @@ public class Fight{
 		}
 		theMonsters = theAbyss.generateMonster(vsNum, highestLevel);
 		// theMonsters = new Monster[vsNum];
-		// switch(vsNum){
-		// 	case 3:
-		// 		theMonsters[2] = new Exoskeleton("BigBad-Wolf", 1, 50, 250, 15);
-		// 	case 2:
-		// 		theMonsters[1] = new Spirit("Aim-Haborym", 1, 450, 350, 35);
-		// 	case 1:
-		// 		theMonsters[0] = new Dragon("Natsunomeryu", 1, 100, 200, 10);
-		// }
+		
 		continueFlag = 2;
 	}
 

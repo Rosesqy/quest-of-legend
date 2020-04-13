@@ -54,8 +54,15 @@ public class Quest{
 	}
 
 	public void monsterTeamTurn(){
-		if(!checkFight()){
-			for(Monster m:theMons){
+		boolean infight = false;
+		for(Monster m:theMons){
+			for(Hero h:theHeros){
+				if(checkFight(m,h)){
+					infight = true;
+					startFight();
+				}
+			}
+			if(!infight){
 				m.setX(m.getX()+1);
 				m.setY(m.getY()+1);
 			}
@@ -402,7 +409,7 @@ public class Quest{
 		continueFlag = flag;
 	}
 
-	public boolean checkFight(){
+	public boolean checkFight(Monster m,Hero h){
 		// Heros engage in a fight only when they visit a common cell.
 		// if(herosMove && theMap.getCellLabel(xPosNow, yPosNow)==" "){
 		// 	double tmp = Math.random();
@@ -411,13 +418,11 @@ public class Quest{
 		// 	}
 		// }
 		// return false;
-		for(Hero h:theHeros){
-			for(Monster m:theMons){
-				if((h.getX()==m.getX()&&Math.abs(h.getY()-m.getY())<=1) || ((h.getY()==m.getY()&&Math.abs(h.getX()-m.getX())<=1))){
-					return true;
-				}
-			}
+		
+		if((h.getX()==m.getX()&&Math.abs(h.getY()-m.getY())<=1) || ((h.getY()==m.getY()&&Math.abs(h.getX()-m.getX())<=1))){
+			return true;
 		}
+		
 		return false;
 	}
 
@@ -456,6 +461,7 @@ public class Quest{
 		theQuest.showWorld();
 		while (theQuest.getGameContinue()){
 			theQuest.heroTeamTurn();
+			theQuest.monsterTeamTurn();
 			theQuest.addRound();
 			if(theQuest.checkWinEnding()){
 				return;
