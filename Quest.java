@@ -102,40 +102,47 @@ public class Quest{
 		System.out.print("Summon the heros...");
 		// thePub = new Pub();
 		// theHeros = thePub.generateHero(heroNum);
-		ArrayList<Hero> allheroes = new ArrayList<Hero>();
-		System.out.println("\nchoose your 3 heroes");
-		Explain.showHero(allheroes);
-		do{
-			boolean hasHero = false;
-			boolean included = false;
-			try {
-				System.out.println("\nEnter the hero's name: ");
-				String name = scan.next();
-				for (Hero hero:allheroes){
-					if(hero.name.equals(name)){
-						if(team.getSize()>=1){
-							included = team.checkrepeat(name);
-						}
-						if(!included){
-							System.out.println("valid name");
-							team.add(hero);	
-						}
-						hasHero = true;
-						break;
-					}
-				}
-				if(!hasHero||included){
-					System.out.println("we dont have this guy or you've selected him/her");
-					continue;
-				}	
-			}catch (Exception e) {
-				System.err.println("Invalid. Error: " + e.getMessage());
-				continue;
-			}
-		}while(team.getSize() < 3);
-		System.out.println("done.");
-		Explain.showTeam(team.getTeam());
-		theHeros = team.getTeam().toArray(theHeros);
+
+
+		// ArrayList<Hero> allheroes = new ArrayList<Hero>();
+		// System.out.println("\nchoose your 3 heroes");
+		// Explain.showHero(allheroes);
+		// do{
+		// 	boolean hasHero = false;
+		// 	boolean included = false;
+		// 	try {
+		// 		System.out.println("\nEnter the hero's name: ");
+		// 		String name = scan.next();
+		// 		for (Hero hero:allheroes){
+		// 			if(hero.name.equals(name)){
+		// 				if(team.getSize()>=1){
+		// 					included = team.checkrepeat(name);
+		// 				}
+		// 				if(!included){
+		// 					System.out.println("valid name");
+		// 					team.add(hero);	
+		// 				}
+		// 				hasHero = true;
+		// 				break;
+		// 			}
+		// 		}
+		// 		if(!hasHero||included){
+		// 			System.out.println("we dont have this guy or you've selected him/her");
+		// 			continue;
+		// 		}	
+		// 	}catch (Exception e) {
+		// 		System.err.println("Invalid. Error: " + e.getMessage());
+		// 		continue;
+		// 	}
+		// }while(team.getSize() < 3);
+		// System.out.println("done.");
+		// Explain.showTeam(team.getTeam());
+		// theHeros = team.getTeam().toArray(theHeros);
+
+		
+		Hero[] theHeros= {new Warrior("Solonor_Thelandira",300,750,650,700,2500,7,0),new Warrior("test2",300,750,700,600,2500,7,0),new Warrior("test3",250,650,600,350,2500,4,0)};
+
+
 		// for(int i = 0; i < heroNum; i++){
 		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
 		// }
