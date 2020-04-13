@@ -28,13 +28,17 @@ public class Quest{
 		continueFlag = true;
 		round = 1;
 		this.createHero();
-		this.createAbyss();
 		this.createMap();
 		this.createMarket();
 		this.createStartPoint();
+		this.createAbyss();
 	}
 
 	public void addRound(){
+		for(Hero h:theHeros){
+			h.addHp((int)(h.getHp()*0.1));
+			h.addMana((int)(h.getMana()*0.1));
+		}
 		round ++;
 	}
 
@@ -42,10 +46,10 @@ public class Quest{
 		System.out.println("Round " + round + " for Heros:");
 		int i = 0;
 		while(i < 3 && continueFlag){
+			showWorld();
 			if(heroAction(theHeros[i])){
 				if (!continueFlag)
 					break;
-				showWorld();
 				i ++;
 			}
 			else
@@ -53,18 +57,28 @@ public class Quest{
 		}
 	}
 
-	public void monsterTeamTurn(){
-		boolean infight = false;
+	public boolean heroCheckInFight(Hero hero){
 		for(Monster m:theMons){
+			if(checkFight(m,hero))
+				return true;
+		}
+		return false;
+	}
+
+	public void monsterTeamTurn(){
+		boolean inFight = false;
+		for(Monster m:theMons){
+			inFight = false;
 			for(Hero h:theHeros){
 				if(checkFight(m,h)){
-					infight = true;
-					startFight();
+					inFight = true;
+					startFight(m,h);
+					break;
 				}
 			}
-			if(!infight){
-				m.setX(m.getX()+1);
-				m.setY(m.getY()+1);
+			if(!inFight){
+				if (!theMap.checkNonAccess(m.getX()+1,m.getY(),m))
+				m.setMonsterPosition(theMap,m.getX()+1, m.getY());
 			}
 		}
 		
@@ -94,7 +108,7 @@ public class Quest{
 	public void createMap(){
 		theMap = new WorldMap();
 		theMap.createMap();
-		theMap.showMap(theHeros, theMons);
+		//theMap.showMap(theHeros, theMons);
 	}
 
 	public void createHero(){
@@ -180,7 +194,6 @@ public class Quest{
 	public void openItemMenu(){
 		String heroTipsStr = "Select whose items?[0-"+ ((theHeros.length)-1) + "], press other keys to return:";
 		String errorStr = "Invalid input.";
-		// Scanner scan = new Scanner(System.in);
 		while(true){
 			System.out.print(heroTipsStr);
 			if(!(scan.hasNextInt())){
@@ -259,12 +272,14 @@ public class Quest{
 
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";
-		String tipsStr2 = "[T]Teleport    [I]Info         [B]Back to nexus [Q]Quit the game";
+		String tipsStr2 = "[Y]Attack      [U]Cast a spell";
+		String tipsStr3 = "[T]Teleport    [I]Info         [B]Back to nexus [Q]Quit the game";
 		String tipsInput = "What will you do? Enter your action (the first letter):";
 		System.out.println(tipsEdge);
 		System.out.println("Hero " + hero.getHeroIdx() + ": " + hero.getName());
 		System.out.println(tipsStr1);
 		System.out.println(tipsStr2);
+		System.out.println(tipsStr3);
 		System.out.print(tipsInput);
 		boolean actionFlag = checkInput(hero);
 		return actionFlag;
@@ -274,6 +289,8 @@ public class Quest{
 		String tipsBound = "Heros can't cross the edge of the world. Try another action:";
 		String tipsNonAcc = "Oops! The cell heros want to go is non-accessible or existed a hero already. Try another action:";
 		String tipsInvalid = "Invalid input. Try another action:";
+		String tipsInFight = "Hero can't pass a monster. Try another action:";
+		String tipsOutFight = "There is no monster nearby. Try another action:";
 		// Scanner scan = new Scanner(System.in);
 		herosMove = false;
 		while(true){
@@ -282,6 +299,24 @@ public class Quest{
 				//Quit the game.
 				System.out.println("Quit the game, bye-bye!");
 				this.setGameContinue(false);
+				return true;
+			}else if (input.charAt(0) == 'Y' || input.charAt(0) == 'y'){
+				if(!heroCheckInFight(hero)){
+					System.out.print(tipsOutFight);
+					continue;
+				}
+				//##################################
+				//the attack.
+			    //##################################
+				return true;
+			}else if (input.charAt(0) == 'U' || input.charAt(0) == 'u'){
+				if(!heroCheckInFight(hero)){
+					System.out.print(tipsOutFight);
+					continue;
+				}
+				//##################################
+				//casting spell.
+			    //##################################
 				return true;
 			}else if (input.charAt(0) == 'Z' || input.charAt(0) == 'z'){
 				//Show the heros team status.
@@ -306,9 +341,9 @@ public class Quest{
 							System.out.println("Hero "+ hero.getHeroIdx() + " is in Top Land already.");
 							return false;
 						}else{
-							if(!theMap.checkNonAccess(hero.getX(), 0))
+							if(!theMap.checkNonAccess(hero.getX(), 0, hero))
 								hero.setHeroPosition(theMap,hero.getX(), 0);
-							else if (!theMap.checkNonAccess(hero.getX(), 1))
+							else if (!theMap.checkNonAccess(hero.getX(), 1, hero))
 								hero.setHeroPosition(theMap,hero.getX(), 1);
 							else if(hero.getX()==7)
 								hero.setHeroPosition(theMap,hero.getX()-1, 0);
@@ -321,9 +356,9 @@ public class Quest{
 							System.out.println("Hero "+ hero.getHeroIdx() + " is in Mid Land already.");
 							return false;
 						}else{
-							if(!theMap.checkNonAccess(hero.getX(), 3))
+							if(!theMap.checkNonAccess(hero.getX(), 3, hero))
 								hero.setHeroPosition(theMap,hero.getX(), 3);
-							else if (!theMap.checkNonAccess(hero.getX(), 4))
+							else if (!theMap.checkNonAccess(hero.getX(), 4, hero))
 								hero.setHeroPosition(theMap,hero.getX(), 4);
 							else if(hero.getX()==7)
 								hero.setHeroPosition(theMap,hero.getX()-1, 3);
@@ -336,9 +371,9 @@ public class Quest{
 							System.out.println("Hero "+ hero.getHeroIdx() + " is in Bot Land already.");
 							return false;
 						}else{
-							if(!theMap.checkNonAccess(hero.getX(), 6))
+							if(!theMap.checkNonAccess(hero.getX(), 6, hero))
 								hero.setHeroPosition(theMap,hero.getX(), 6);
-							else if (!theMap.checkNonAccess(hero.getX(), 7))
+							else if (!theMap.checkNonAccess(hero.getX(), 7, hero))
 								hero.setHeroPosition(theMap,hero.getX(), 7);
 							else if(hero.getX()==7)
 								hero.setHeroPosition(theMap,hero.getX()-1, 6);
@@ -355,10 +390,14 @@ public class Quest{
 				if(hero.getX() == 0){
 					System.out.print(tipsBound);
 					continue;
-				}else if(theMap.checkNonAccess(hero.getX()-1 , hero.getY())){
+				}else if(theMap.checkNonAccess(hero.getX()-1 , hero.getY(), hero)){
 					System.out.print(tipsNonAcc);
 					continue;
 				}else{
+					if(heroCheckInFight(hero)){
+						System.out.print(tipsInFight);
+						continue;
+					}
 					hero.setHeroPosition(theMap,hero.getX()-1, hero.getY());
 					return true;
 				}
@@ -367,7 +406,7 @@ public class Quest{
 				if(hero.getX() == 7){
 					System.out.print(tipsBound);
 					continue;
-				}else if(theMap.checkNonAccess(hero.getX()+1 , hero.getY())){
+				}else if(theMap.checkNonAccess(hero.getX()+1 , hero.getY(), hero)){
 					System.out.print(tipsNonAcc);
 					continue;
 				}else{
@@ -379,7 +418,7 @@ public class Quest{
 				if(hero.getY() == 0){
 					System.out.print(tipsBound);
 					continue;
-				}else if(theMap.checkNonAccess(hero.getX() , hero.getY()-1)){
+				}else if(theMap.checkNonAccess(hero.getX() , hero.getY()-1, hero)){
 					System.out.print(tipsNonAcc);
 					continue;
 				}else{
@@ -388,10 +427,10 @@ public class Quest{
 				}
 			}else if (input.charAt(0) == 'D' || input.charAt(0) == 'd'){
 				//Move right.
-				if(yPosNow == 7){
+				if(hero.getY() == 7){
 					System.out.print(tipsBound);
 					continue;
-				}else if(theMap.checkNonAccess(hero.getX() , hero.getY()+1)){
+				}else if(theMap.checkNonAccess(hero.getX() , hero.getY()+1, hero)){
 					System.out.print(tipsNonAcc);
 					continue;
 				}else{
@@ -400,7 +439,7 @@ public class Quest{
 				}
 			}else if (input.charAt(0) == 'B' || input.charAt(0) == 'b'){
 				//Back to nexus.
-				if(theMap.checkNonAccess(7,(hero.getHeroIdx()-1)*3)){
+				if(theMap.checkNonAccess(7,(hero.getHeroIdx()-1)*3, hero)){
 					System.out.print(tipsNonAcc);
 					continue;
 				}else{
@@ -457,12 +496,40 @@ public class Quest{
 				return true;
 			}
 		}
+		for(Monster m:theMons){
+			if(m.getX()==7){
+				System.out.println(m.getName() + " gets to the light nexus!");
+				System.out.println("*******************************");
+				System.out.println("*     Ooo! Heros lose!        *");
+				System.out.println("*******************************");
+				return true;
+			}
+		}
 		return false;
 	}
 
-	public void startFight(){
-		theFight = new Fight(theHeros, theAbyss);
-		theFight.singleFight();
+	public void startFight(Monster m, Hero h){
+		theFight = new Fight(h,m);
+		theFight.singleMonsterAttack();
+		if(h.getHp() == 0){
+			String laneStr = "";
+			switch(h.getHeroIdx()){
+				case 1:
+					laneStr = "Top lane";
+					break;
+				case 2:
+					laneStr = "Mid lane";
+					break;
+				case 3:
+					laneStr = "Bot lane";
+					break;
+			}
+			System.out.println(h.getName() + " is knocked down.");
+			h.addMoney((int)(-0.5*h.getMoney()));
+			System.out.print("In "+ laneStr + ", ");
+			h.getRevived();
+			h.setHeroPosition(theMap, 7, (h.getHeroIdx()-1)*3);
+		}
 	}
 
 	public void visitMarket(Hero hero){
