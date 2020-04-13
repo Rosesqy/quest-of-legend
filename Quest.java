@@ -100,8 +100,8 @@ public class Quest{
 		herosMove = false;
 		int heroNum = 3;
 		System.out.print("Summon the heros...");
-		// thePub = new Pub();
-		// theHeros = thePub.generateHero(heroNum);
+		thePub = new Pub();
+		theHeros = thePub.generateHero(heroNum);
 
 
 		// ArrayList<Hero> allheroes = new ArrayList<Hero>();
@@ -140,8 +140,8 @@ public class Quest{
 		// theHeros = team.getTeam().toArray(theHeros);
 
 		
-		Hero[] theHeros= {new Warrior("Solonor_Thelandira",300,750,650,700,2500,7,0),new Warrior("test2",300,750,700,600,2500,7,0),new Warrior("test3",250,650,600,350,2500,4,0)};
-
+		// Hero[] temp= {new Warrior("Solonor_Thelandira",300,750,650,700,2500,7,0),new Warrior("test2",300,750,700,600,2500,7,0),new Warrior("test3",250,650,600,350,2500,4,0)};
+		// theHeros = temp;
 
 		// for(int i = 0; i < heroNum; i++){
 		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
@@ -159,7 +159,8 @@ public class Quest{
 	}
 
 	public void showWorld(){
-		theMap.showMap(xPosNow,yPosNow);
+		// theMap.showMap(xPosNow,yPosNow);
+		theMap.showMap(theHeros, theMons);
 	}
 
 	public void showTeamStatus(){
@@ -251,7 +252,7 @@ public class Quest{
 
 	public boolean heroAction(Hero hero){
 		//Single action for a hero in one round.
-		theMap.showMap(hero.getX(), hero.getY());
+		theMap.showMap(theHeros,theMons);
 
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";
@@ -461,13 +462,13 @@ public class Quest{
 		theFight.singleFight();
 	}
 
-	public void visitMarket(){
-		theMarket.visitMarket();
+	public void visitMarket(Hero hero){
+		theMarket.visitMarket(hero);
 	}
 
 	public static void main(String[] args){
 		Quest theQuest = new Quest();
-		theQuest.showWorld();
+		// theQuest.showWorld();
 		while (theQuest.getGameContinue()){
 			theQuest.heroTeamTurn();
 			theQuest.monsterTeamTurn();

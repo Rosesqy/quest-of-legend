@@ -73,7 +73,38 @@ public class WorldMap{
 		System.out.println("done.");
 	}
 
-	public void showMap(int xPos, int yPos){
+	// public void showMap(int xPos, int yPos){
+	// 	String line = "";
+	// 	String middle = "";
+	// 	//System.out.println(mapEdge);
+	// 	for (int i = 0; i < size; i++){
+	// 		line = "";
+	// 		middle = "";
+	// 		for (int j = 0; j < size; j ++){
+	// 			line = line + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + "  ";
+	// 			if (mapCell[i][j].getLabel() == "I")
+	// 				middle = middle + "| X X X |  ";
+	// 			else{
+	// 				if(mapCell[i][j].getIsHero()>0)
+	// 					middle  = middle + "| H" + mapCell[i][j].getIsHero() + " ";
+	// 				else
+	// 					middle = middle + "|    ";
+	// 				middle = middle + "   |  ";
+	// 			}
+	// 			// if (i == xPos && j == yPos)
+	// 			// 	line = line + mapCell[i][j].getLabel() + "H|";
+	// 			// else
+	// 				//line = line + mapCell[i][j].getLabel() + " |";
+	// 		}
+				
+	// 		System.out.println(line);
+	// 		System.out.println(middle);
+	// 		System.out.println(line);
+	// 		System.out.print("\n");
+	// 	}
+	// }
+
+	public void showMap(Hero[] heros, ArrayList<Monster> monsters){
 		String line = "";
 		String middle = "";
 		//System.out.println(mapEdge);
@@ -82,21 +113,40 @@ public class WorldMap{
 			middle = "";
 			for (int j = 0; j < size; j ++){
 				line = line + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + "  ";
+				
+				for(int h = 1;h<4;h++){
+					if(heros[h-1].getX()==i && heros[h-1].getY()==j){
+						mapCell[i][j].setIsHero(h);
+					}
+				}
+				for(int m = 1;m<=monsters.size();m++){
+					if(monsters.get(m-1).getX()==i && monsters.get(m-1).getY()==j){
+						mapCell[i][j].setIsMonster(m);
+					}
+				}
+
 				if (mapCell[i][j].getLabel() == "I")
 					middle = middle + "| X X X |  ";
 				else{
-					if(mapCell[i][j].getIsHero()>0)
+					if(mapCell[i][j].getIsHero()>0){
 						middle  = middle + "| H" + mapCell[i][j].getIsHero() + " ";
-					else
+					}else if(mapCell[i][j].getIsMonster()>0){
+						middle  = middle + "| M" + mapCell[i][j].getIsMonster() + " ";
+					}else{
 						middle = middle + "|    ";
+					}
 					middle = middle + "   |  ";
 				}
+					
+					
+				
 				// if (i == xPos && j == yPos)
 				// 	line = line + mapCell[i][j].getLabel() + "H|";
 				// else
 					//line = line + mapCell[i][j].getLabel() + " |";
-			}
 				
+				
+			}
 			System.out.println(line);
 			System.out.println(middle);
 			System.out.println(line);
