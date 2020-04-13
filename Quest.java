@@ -21,7 +21,7 @@ public class Quest{
 	boolean continueFlag;
 	boolean herosMove;
 	double engageFightRate = 0.2;
-	int round;
+	static int round;
 
 	public Quest(){
 		System.out.println("Welcome to the Great Quest!");
@@ -251,6 +251,8 @@ public class Quest{
 
 	public boolean heroAction(Hero hero){
 		//Single action for a hero in one round.
+		theMap.showMap(hero.getX(), hero.getY());
+
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";
 		String tipsStr2 = "[T]Teleport    [I]Info         [B]Back to nexus [Q]Quit the game";
@@ -470,6 +472,9 @@ public class Quest{
 			theQuest.heroTeamTurn();
 			theQuest.monsterTeamTurn();
 			theQuest.addRound();
+			if(round==8){
+				theQuest.createAbyss();
+			}
 			if(theQuest.checkWinEnding()){
 				return;
 			}
