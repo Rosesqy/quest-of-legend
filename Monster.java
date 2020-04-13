@@ -8,6 +8,7 @@ public class Monster extends Creatures{
 	int damage;
 	// int defense;
 	protected float dodgeRate;
+	int monsterIdx;
 
 	Monster(String mName, int mLv, int mDam, int mDef, int mDodge){
 		super(mName, mLv, mDef);
@@ -19,6 +20,7 @@ public class Monster extends Creatures{
 		// hp = 100 * level;
 		// x = 0;
 		// y = 0;
+		monsterIdx = 1;
 	}
 
 	// public int getX(){
@@ -36,6 +38,13 @@ public class Monster extends Creatures{
 	// public int getHp(){
 	// 	return hp;
 	// }
+
+	public void setMonsterPosition(WorldMap theMap,int xPos, int yPos){
+		theMap.setCellIsMonster(0, x, y);
+		theMap.setCellIsMonster(monsterIdx, xPos, yPos);
+		x = xPos;
+		y = yPos;
+	}
 
 	public int getDamage(){
 		return damage;
