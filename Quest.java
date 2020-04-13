@@ -153,10 +153,6 @@ public class Quest{
 		// Explain.showTeam(team.getTeam());
 		// theHeros = team.getTeam().toArray(theHeros);
 
-
-		// for(int i = 0; i < heroNum; i++){
-		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
-		// }
 		for(int i=0;i<heroNum;i++){
 			System.out.println(theHeros[i]);
 			theHeros[i].setY(i*3);
