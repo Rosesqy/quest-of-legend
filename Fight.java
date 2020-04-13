@@ -10,28 +10,54 @@ public class Fight{
 	int highestLevel;
 	int continueFlag; // "2" represents fight continue, "1" means heros win, "0" means monsters win. 
 	Abyss theAbyss;
-	Fight(Hero[] heros, Abyss abyss){
-	//Generate the monsters.
+	Hero singleHero;
+	Monster singleMonster;
+	// Fight(Hero[] heros, Abyss abyss){
+	// //Generate the monsters.
 
-		theHeros = heros;
-		theAbyss = abyss;
-		vsNum = theHeros.length;
-		highestLevel = theHeros[0].getLevel();
-		for(int i = 1; i < vsNum ; i ++ ){
-			if( theHeros[i].getLevel() > highestLevel )
-				highestLevel = theHeros[i].getLevel();
-		}
+	// 	theHeros = heros;
+	// 	theAbyss = abyss;
+	// 	vsNum = theHeros.length;
+	// 	highestLevel = theHeros[0].getLevel();
+	// 	for(int i = 1; i < vsNum ; i ++ ){
+	// 		if( theHeros[i].getLevel() > highestLevel )
+	// 			highestLevel = theHeros[i].getLevel();
+	// 	}
 		
-		heroSurvive = new int[vsNum];
-		monsterSurvive = new int[vsNum];
-		for(int i = 0; i < vsNum ; i ++ ){
-			heroSurvive[i] = (theHeros[i].getHp() == 0)?0:1;
-			monsterSurvive[i] = 1;
-		}
-		theMonsters = theAbyss.generateMonster(vsNum, highestLevel);
-		// theMonsters = new Monster[vsNum];
+	// 	heroSurvive = new int[vsNum];
+	// 	monsterSurvive = new int[vsNum];
+	// 	for(int i = 0; i < vsNum ; i ++ ){
+	// 		heroSurvive[i] = (theHeros[i].getHp() == 0)?0:1;
+	// 		monsterSurvive[i] = 1;
+	// 	}
+	// 	theMonsters = theAbyss.generateMonster(vsNum, highestLevel);
+	// 	// theMonsters = new Monster[vsNum];
 		
-		continueFlag = 2;
+	// 	continueFlag = 2;
+	// }
+
+	public Fight(Hero hero, Monster monster){
+		singleHero = hero;
+		singleMonster = monster;
+
+	}
+
+	public void singleMonsterAttack(){
+		System.out.println(singleMonster.getName() + " attacks the hero " + singleHero.getName());
+		double tmp = Math.random();
+		if(tmp < (singleHero.getAgility()*0.001)){
+			System.out.println(" Miss!");
+			return;
+		}
+		int monsterDamage = singleMonster.getDamage();
+		int realDamage = (monsterDamage > singleHero.getDefense())?( monsterDamage - singleHero.getDefense()):0;
+		if(realDamage >= singleHero.getHp()){
+			//The hero faints, the damage overflow.
+			realDamage = singleHero.getHp();
+		}
+		System.out.println(" Cause " + realDamage + " damage to " + singleHero.getName() + ".");
+		singleHero.addHp( -1 * realDamage);
+		return;
 	}
 
 	public void showStatus(){
