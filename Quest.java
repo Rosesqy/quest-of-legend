@@ -75,7 +75,6 @@ public class Quest{
 				for(Hero h:theHeros){
 					if(checkFight(m,h)){
 						inFight = true;
-						// startFight(m,h);
 						break;
 					}
 				}
@@ -160,9 +159,6 @@ public class Quest{
 		// Explain.showTeam(team.getTeam());
 		// theHeros = team.getTeam().toArray(theHeros);
 
-		
-		// Hero[] temp= {new Warrior("Solonor_Thelandira",300,750,650,700,2500,7,0),new Warrior("test2",300,750,700,600,2500,7,0),new Warrior("test3",250,650,600,350,2500,4,0)};
-		// theHeros = temp;
 
 		// for(int i = 0; i < heroNum; i++){
 		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
@@ -186,12 +182,12 @@ public class Quest{
 		theMap.showMap(theHeros, theMons);
 	}
 
-	public void showTeamStatus(){
-		for(int i = 0; i< theHeros.length ; i ++){
-			System.out.print("Hero " + (i+1) + ": ");
-			System.out.println(theHeros[i].toStringFull());
-		}
-	}
+	// public void showTeamStatus(){
+	// 	for(int i = 0; i< theHeros.length ; i ++){
+	// 		System.out.print("Hero " + (i+1) + ": ");
+	// 		System.out.println(theHeros[i].toStringFull());
+	// 	}
+	// }
 
 	public void showSingleStatus(Hero hero){
 		System.out.println("Hero " + hero.getHeroIdx() + " status:" + hero.toStringFull()); 
@@ -314,8 +310,10 @@ public class Quest{
 				//##################################
 				//the attack.
 				//##################################
-				startFight(enemy, hero);
-				return true;
+				else{
+					startFight(enemy, hero);
+					return true;
+				}
 			}else if (input.charAt(0) == 'U' || input.charAt(0) == 'u'){
 				if(!heroCheckInFight(hero)){
 					System.out.print(tipsOutFight);
@@ -478,20 +476,13 @@ public class Quest{
 	}
 
 	public boolean checkFight(Monster m,Hero h){
-		// Heros engage in a fight only when they visit a common cell.
-		// if(herosMove && theMap.getCellLabel(xPosNow, yPosNow)==" "){
-		// 	double tmp = Math.random();
-		// 	if(tmp < engageFightRate){
-		// 		return true;
-		// 	}
-		// }
-		// return false;
 		
-		if((h.getX()==m.getX()&&Math.abs(h.getY()-m.getY())<=1) || ((h.getY()==m.getY()&&Math.abs(h.getX()-m.getX())<=1))){
+		if(!m.isDead()){	
+			if((h.getX()==m.getX()&&Math.abs(h.getY()-m.getY())<=1) || ((h.getY()==m.getY()&&Math.abs(h.getX()-m.getX())<=1))){
 
-			enemy = m;
-
-			return true;
+				enemy = m;
+				return true;
+			}
 		}
 		
 		return false;
@@ -531,8 +522,10 @@ public class Quest{
 		Fight theFight = new Fight(h,m);
 
 		theFight.singleHeroAttack();
-
-		theFight.singleMonsterAttack();
+		if(!m.isDead()){
+			theFight.singleMonsterAttack();
+		}
+		
 		if(h.getHp() == 0){
 			String laneStr = "";
 			switch(h.getHeroIdx()){

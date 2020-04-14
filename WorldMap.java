@@ -112,8 +112,12 @@ public class WorldMap{
 				}
 				for(int m = 1;m<=monsters.size();m++){
 					// System.out.println(monsters.get(m-1).getX()+monsters.get(m-1).getY());
-					if(monsters.get(m-1).getX()==i && monsters.get(m-1).getY()==j && !monsters.get(m-1).isDead()){
-						mapCell[i][j].setIsMonster(m);
+					if(monsters.get(m-1).getX()==i && monsters.get(m-1).getY()==j){
+						if(monsters.get(m-1).isDead()){
+							mapCell[i][j].setIsMonster(-1);
+						}else{
+							mapCell[i][j].setIsMonster(m);
+						}
 					}
 				}
 

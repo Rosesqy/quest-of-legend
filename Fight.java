@@ -75,7 +75,7 @@ public class Fight{
 		while(true){
 			String input = scan.next();
 			if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){
-				if(singleMonster.getHp()>0){
+				if(!singleMonster.isDead()){
 					System.out.print(singleHero.getName() + " attacks " + singleMonster.getName() + ".");
 					this.heroAttackMonster(singleHero,singleMonster);
 					if(singleMonster.getHp()== 0){
@@ -109,8 +109,7 @@ public class Fight{
 							}
 						}
 						else{
-							
-								if(singleMonster.getHp()>0){
+								if(!singleMonster.isDead()){
 									System.out.print(singleHero.getName() + " casts " + useSpell.getName() + " to " + singleMonster.getName() + ".");
 									this.heroSpellMonster(singleHero, singleMonster, useSpell);
 									if(singleMonster.getHp()== 0){
@@ -168,36 +167,52 @@ public class Fight{
 		}
 	}
 
-	public void herosTurn(){
-		for(int i = 0; i < vsNum ; i ++){
-			if(heroSurvive[i] == 1){
-				System.out.print("Turn of hero "+ (i + 1) + ":[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
-				this.heroDo(i);
-				if(this.checkEnd())
-					break;
-			}
-		}
-	}
+	// public void herosTurn(){
+	// 	for(int i = 0; i < vsNum ; i ++){
+	// 		if(heroSurvive[i] == 1){
+	// 			System.out.print("Turn of hero "+ (i + 1) + ":[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
+	// 			this.heroDo(i);
+	// 			if(this.checkEnd())
+	// 				break;
+	// 		}
+	// 	}
+	// }
 
 	public boolean checkEnd(){
-		int heroCal = 0;
-		int monsterCal = 0;
-		for(int i = 0; i < vsNum ; i ++ ){
-			heroCal = heroCal + heroSurvive[i];
-			monsterCal = monsterCal + monsterSurvive[i];
-		}
-		if(heroCal == 0){
-			System.out.println("All the heros faint, lose the fight.");
+		if(singleHero.getHp() <= 0){
+			System.out.println(" the hero faint, lose the fight.");
 			continueFlag = 0;
+			fightReward();
 			return true;
 		}
-		if(monsterCal == 0){
+		else if(singleMonster.getHp() <= 0){
 			System.out.println("The heros win the fight. Congratulation!");
 			continueFlag = 1;
+			fightReward();
 			return true;
 		}
 		return false;
 	}
+
+	// public boolean checkEnd(){
+	// 	int heroCal = 0;
+	// 	int monsterCal = 0;
+	// 	for(int i = 0; i < vsNum ; i ++ ){
+	// 		heroCal = heroCal + heroSurvive[i];
+	// 		monsterCal = monsterCal + monsterSurvive[i];
+	// 	}
+	// 	if(heroCal == 0){
+	// 		System.out.println("All the heros faint, lose the fight.");
+	// 		continueFlag = 0;
+	// 		return true;
+	// 	}
+	// 	if(monsterCal == 0){
+	// 		System.out.println("The heros win the fight. Congratulation!");
+	// 		continueFlag = 1;
+	// 		return true;
+	// 	}
+	// 	return false;
+	// }
 
 	public void heroDo(int nowId){
 		Scanner scan = new Scanner(System.in);
@@ -368,15 +383,15 @@ public class Fight{
 		hero.addHp( -1 * realDamage);
 	}
 
-	public void monsterTurn(){
-		for(int i = 0; i < vsNum ; i ++){
-			if(monsterSurvive[i] == 1){
-				this.monsterDo(i);
-				if(this.checkEnd())
-					break;
-			}
-		}
-	}
+	// public void monsterTurn(){
+	// 	for(int i = 0; i < vsNum ; i ++){
+	// 		if(monsterSurvive[i] == 1){
+	// 			this.monsterDo(i);
+	// 			if(this.checkEnd())
+	// 				break;
+	// 		}
+	// 	}
+	// }
 
 	public void monsterDo(int nowId){
 		if(heroSurvive[nowId] == 1){
@@ -403,28 +418,28 @@ public class Fight{
 		}
 	}
 
-	public void singleFight(){
-		while(continueFlag == 2){
-			System.out.println("-------------------------------------------------------------------------");
-			this.showStatus();
-			System.out.println("-------------------------------------------------------------------------");
-			this.herosTurn();
-			if(continueFlag != 2){
-				System.out.println("-------------------------------------------------------------------------");
-				this.fightReward();
-				System.out.println("-------------------------------------------------------------------------");
-				break;
-			}
-			System.out.println("-------------------------------------------------------------------------");
-			this.monsterTurn();
-			if(continueFlag != 2){
-				this.fightPenalty();
-				System.out.println("-------------------------------------------------------------------------");
-				break;
-			}
-			this.herosRegain();
-		}
-	}
+	// public void singleFight(){
+	// 	while(continueFlag == 2){
+	// 		System.out.println("-------------------------------------------------------------------------");
+	// 		this.showStatus();
+	// 		System.out.println("-------------------------------------------------------------------------");
+	// 		this.herosTurn();
+	// 		if(continueFlag != 2){
+	// 			System.out.println("-------------------------------------------------------------------------");
+	// 			this.fightReward();
+	// 			System.out.println("-------------------------------------------------------------------------");
+	// 			break;
+	// 		}
+	// 		System.out.println("-------------------------------------------------------------------------");
+	// 		this.monsterTurn();
+	// 		if(continueFlag != 2){
+	// 			this.fightPenalty();
+	// 			System.out.println("-------------------------------------------------------------------------");
+	// 			break;
+	// 		}
+	// 		this.herosRegain();
+	// 	}
+	// }
 
 	public void herosRegain(){
 		for(int i = 0; i < vsNum ; i ++ ){
@@ -436,24 +451,37 @@ public class Fight{
 	}
 
 	public void fightReward(){
-		for(int i = 0; i < vsNum ; i ++ ){
-			if(heroSurvive[i] == 1){
-				theHeros[i].addMoney(150);
-				theHeros[i].addExperience(2);
-				if(theHeros[i].checkLevelUp())
-					theHeros[i].levelUp();
-			}else{
-				theHeros[i].getRevived();
-			}
+		if(singleHero.getHp()>0){
+			singleHero.addMoney(150);
+			singleHero.addExperience(2);
+			if(singleHero.checkLevelUp())
+				singleHero.levelUp();
+		}else{
+			singleHero.getRevived();
 		}
+		
 	}
 
-	public void fightPenalty(){
-		for(int i = 0; i < vsNum ; i ++ ){
-			theHeros[i].addMoney((int)(-0.5*theHeros[i].getMoney()));
-			theHeros[i].getRevived();
-		}
-	}
+
+	// public void fightReward(){
+	// 	for(int i = 0; i < vsNum ; i ++ ){
+	// 		if(heroSurvive[i] == 1){
+	// 			theHeros[i].addMoney(150);
+	// 			theHeros[i].addExperience(2);
+	// 			if(theHeros[i].checkLevelUp())
+	// 				theHeros[i].levelUp();
+	// 		}else{
+	// 			theHeros[i].getRevived();
+	// 		}
+	// 	}
+	// }
+
+	// public void fightPenalty(){
+	// 	for(int i = 0; i < vsNum ; i ++ ){
+	// 		theHeros[i].addMoney((int)(-0.5*theHeros[i].getMoney()));
+	// 		theHeros[i].getRevived();
+	// 	}
+	// }
 
 	// public static void main(String args[]){
 	// 	Hero[] HerosTeam = new Hero[3];
