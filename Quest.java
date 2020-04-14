@@ -544,7 +544,6 @@ public class Quest{
 
 	public static void main(String[] args){
 		Quest theQuest = new Quest();
-		// theQuest.showWorld();
 		while (theQuest.getGameContinue()){
 			theQuest.heroTeamTurn();
 			theQuest.monsterTeamTurn();
