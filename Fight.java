@@ -63,11 +63,9 @@ public class Fight{
 	}
 
 	public void singleHeroAttack(){
-		
 		if(singleHero.getHp() > 0){
 			System.out.print("Turn of H"+ singleHero.getHeroIdx() + singleHero.getName()+ ":[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
 			this.singleHeroDo();
-
 		}
 		
 	}
@@ -82,20 +80,6 @@ public class Fight{
 					this.heroAttackMonster(singleHero,singleMonster);
 					if(singleMonster.getHp()== 0){
 						System.out.println(singleMonster.getName() + " was defeated!");
-						
-					}
-				}
-				else{
-					for(int j = 0; j < vsNum ; j ++){
-						if(monsterSurvive[j] == 1){
-							System.out.print(singleHero.getName() + " attacks " + theMonsters[j].getName() + ".");
-							this.heroAttackMonster(singleHero,theMonsters[j]);
-							if(theMonsters[j].getHp() == 0){
-								System.out.println(theMonsters[j].getName() + " was defeated!");
-								monsterSurvive[j] = 0;
-							}
-							break;
-						}
 					}
 				}
 				return;
@@ -135,7 +119,6 @@ public class Fight{
 									}
 									break;
 								}
-							
 						}
 						return;
 					}

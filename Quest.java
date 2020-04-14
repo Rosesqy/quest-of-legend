@@ -14,6 +14,7 @@ public class Quest{
 
 	Team team = new Team();
 	ArrayList<Monster> theMons = new ArrayList<Monster>();
+	Monster enemy;
 
 	int xPosNow;
 	int yPosNow;
@@ -68,17 +69,22 @@ public class Quest{
 	public void monsterTeamTurn(){
 		boolean inFight = false;
 		for(Monster m:theMons){
-			inFight = false;
-			for(Hero h:theHeros){
-				if(checkFight(m,h)){
-					inFight = true;
-					startFight(m,h);
-					break;
+			// System.out.println(m.getName()+"hp"+m.getHp());
+			if(!m.isDead()){
+				inFight = false;
+				for(Hero h:theHeros){
+					if(checkFight(m,h)){
+						inFight = true;
+						// startFight(m,h);
+						break;
+					}
 				}
-			}
-			if(!inFight){
-				if (!theMap.checkNonAccess(m.getX()+1,m.getY(),m))
-				m.setMonsterPosition(theMap,m.getX()+1, m.getY());
+				if(!inFight){
+					if (!theMap.checkNonAccess(m.getX()+1,m.getY(),m))
+					m.setMonsterPosition(theMap,m.getX()+1, m.getY());
+				}
+			}else{
+				return;
 			}
 		}
 		
@@ -307,7 +313,8 @@ public class Quest{
 				}
 				//##################################
 				//the attack.
-			    //##################################
+				//##################################
+				startFight(enemy, hero);
 				return true;
 			}else if (input.charAt(0) == 'U' || input.charAt(0) == 'u'){
 				if(!heroCheckInFight(hero)){
@@ -481,6 +488,9 @@ public class Quest{
 		// return false;
 		
 		if((h.getX()==m.getX()&&Math.abs(h.getY()-m.getY())<=1) || ((h.getY()==m.getY()&&Math.abs(h.getX()-m.getX())<=1))){
+
+			enemy = m;
+
 			return true;
 		}
 		
