@@ -63,6 +63,7 @@ public class Monster extends Creatures{
 
 	public boolean isDead(){
 		if(this.hp <= 0){
+			this.monsterIdx = -1;
 			return true;
 		}
 		return false;
