@@ -118,6 +118,7 @@ public class Quest{
 		thePub = new Pub();
 		theHeros = thePub.generateHero(heroNum);
 
+
 		// ArrayList<Hero> allheroes = new ArrayList<Hero>();
 		// System.out.println("\nchoose your 3 heroes");
 		// Explain.showHero(allheroes);
@@ -153,6 +154,13 @@ public class Quest{
 		// Explain.showTeam(team.getTeam());
 		// theHeros = team.getTeam().toArray(theHeros);
 
+		
+		// Hero[] temp= {new Warrior("Solonor_Thelandira",300,750,650,700,2500,7,0),new Warrior("test2",300,750,700,600,2500,7,0),new Warrior("test3",250,650,600,350,2500,4,0)};
+		// theHeros = temp;
+
+		// for(int i = 0; i < heroNum; i++){
+		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
+		// }
 		for(int i=0;i<heroNum;i++){
 			System.out.println(theHeros[i]);
 			theHeros[i].setY(i*3);
@@ -264,7 +272,7 @@ public class Quest{
 
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";
-		String tipsStr2 = "[Y]Attack      [U]Cast a spell";
+		String tipsStr2 = "[Y]Attack      [U]Cast a spell  [M]Shopping in the nexus";
 		String tipsStr3 = "[T]Teleport    [I]Info         [B]Back to nexus [Q]Quit the game";
 		String tipsInput = "What will you do? Enter your action (the first letter):";
 		System.out.println(tipsEdge);
@@ -377,6 +385,15 @@ public class Quest{
 						System.out.println("Invalid input.");
 						return false;
 				}
+			}else if (input.charAt(0) == 'M' || input.charAt(0) == 'm'){
+				//Hero shopping.
+				if(hero.getX()!=7){
+					System.out.println("Hero " + hero.getHeroIdx() + " is not in the nexus!");
+					return false;
+				}else{
+					visitMarket(hero);
+					return false;
+				}
 			}else if (input.charAt(0) == 'W' || input.charAt(0) == 'w'){
 				//Move up.
 				if(hero.getX() == 0){
@@ -470,12 +487,12 @@ public class Quest{
 		return false;
 	}
 
-	// public boolean checkMarket(){
-	// 	if(herosMove && theMap.getCellLabel(xPosNow, yPosNow)=="M"){
-	// 		return true;
-	// 	}
-	// 	return false;
-	// }
+	public boolean checkMarket(){
+		if(herosMove && theMap.getCellLabel(xPosNow, yPosNow)=="M"){
+			return true;
+		}
+		return false;
+	}
 
 	public boolean checkWinEnding(){
 		//Check whether a hero or a monster reach the opposite nexus.
@@ -522,7 +539,6 @@ public class Quest{
 			h.getRevived();
 			h.setHeroPosition(theMap, 7, (h.getHeroIdx()-1)*3);
 		}
-
 	}
 
 	public void visitMarket(Hero hero){
