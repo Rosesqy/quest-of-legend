@@ -95,37 +95,6 @@ public class WorldMap{
 		System.out.println("done.");
 	}
 
-	// public void showMap(int xPos, int yPos){
-	// 	String line = "";
-	// 	String middle = "";
-	// 	//System.out.println(mapEdge);
-	// 	for (int i = 0; i < size; i++){
-	// 		line = "";
-	// 		middle = "";
-	// 		for (int j = 0; j < size; j ++){
-	// 			line = line + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + " - " + mapCell[i][j].getLabel() + "  ";
-	// 			if (mapCell[i][j].getLabel() == "I")
-	// 				middle = middle + "| X X X |  ";
-	// 			else{
-	// 				if(mapCell[i][j].getIsHero()>0)
-	// 					middle  = middle + "| H" + mapCell[i][j].getIsHero() + " ";
-	// 				else
-	// 					middle = middle + "|    ";
-	// 				middle = middle + "   |  ";
-	// 			}
-	// 			// if (i == xPos && j == yPos)
-	// 			// 	line = line + mapCell[i][j].getLabel() + "H|";
-	// 			// else
-	// 				//line = line + mapCell[i][j].getLabel() + " |";
-	// 		}
-				
-	// 		System.out.println(line);
-	// 		System.out.println(middle);
-	// 		System.out.println(line);
-	// 		System.out.print("\n");
-	// 	}
-	// }
-
 	public void showMap(Hero[] heros, ArrayList<Monster> monsters){
 		String line = "";
 		String middle = "";
@@ -163,15 +132,7 @@ public class WorldMap{
 					}
 					middle = middle + "   |  ";
 				}
-					
-					
-				
-				// if (i == xPos && j == yPos)
-				// 	line = line + mapCell[i][j].getLabel() + "H|";
-				// else
-					//line = line + mapCell[i][j].getLabel() + " |";
-				
-				
+									
 			}
 			System.out.println(line);
 			System.out.println(middle);
@@ -180,10 +141,19 @@ public class WorldMap{
 		}
 	}
 
-	public boolean checkNonAccess(int xPos, int yPos){
+	public boolean checkNonAccess(int xPos, int yPos, Hero hero){
 		if (mapCell[xPos][yPos].getLabel() == "I")
 			return true;
 		else if(mapCell[xPos][yPos].getIsHero() > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean checkNonAccess(int xPos, int yPos, Monster monster){
+		if (mapCell[xPos][yPos].getLabel() == "I")
+			return true;
+		else if(mapCell[xPos][yPos].getIsMonster() > 0)
 			return true;
 		else
 			return false;
@@ -195,5 +165,7 @@ public class WorldMap{
 		theMap.createMap();
 		//theMap.showMap(1,1);
 	}
+	
+
 	
 }

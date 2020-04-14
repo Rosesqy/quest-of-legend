@@ -8,6 +8,7 @@ public class Market{
 	List<Item> armorList;
 	List<Item> potionList;
 	Hero[] theHeros;
+	Hero theHero;
 
 	Market(Hero[] heros){
 		spellList = new ArrayList<Spell>();
@@ -17,6 +18,16 @@ public class Market{
 		theHeros = heros;
 		this.initial();
 	}
+
+	public Market(Hero hero){
+		spellList = new ArrayList<Spell>();
+		weaponList = new ArrayList<Item>();
+		armorList = new ArrayList<Item>();
+		potionList = new ArrayList<Item>();
+		theHero = hero;
+		this.initial();
+	}
+
 
 	public void initial(){
 		Spell pspell;

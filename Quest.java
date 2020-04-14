@@ -7,7 +7,7 @@ public class Quest{
 	static WorldMap theMap;
 	static Scanner scan = new Scanner(System.in);
 	static Market theMarket;
-	Fight theFight;
+	// Fight theFight;
 	static Abyss theAbyss;
 	Pub thePub;
 	Hero[] theHeros;
@@ -272,7 +272,7 @@ public class Quest{
 
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";
-		String tipsStr2 = "[Y]Attack      [U]Cast a spell";
+		String tipsStr2 = "[Y]Attack      [U]Cast a spell  [M]Shopping in the nexus";
 		String tipsStr3 = "[T]Teleport    [I]Info         [B]Back to nexus [Q]Quit the game";
 		String tipsInput = "What will you do? Enter your action (the first letter):";
 		System.out.println(tipsEdge);
@@ -384,6 +384,15 @@ public class Quest{
 					default:
 						System.out.println("Invalid input.");
 						return false;
+				}
+			}else if (input.charAt(0) == 'M' || input.charAt(0) == 'm'){
+				//Hero shopping.
+				if(hero.getX()!=7){
+					System.out.println("Hero " + hero.getHeroIdx() + " is not in the nexus!");
+					return false;
+				}else{
+					visitMarket(hero);
+					return false;
 				}
 			}else if (input.charAt(0) == 'W' || input.charAt(0) == 'w'){
 				//Move up.
@@ -509,7 +518,10 @@ public class Quest{
 	}
 
 	public void startFight(Monster m, Hero h){
-		theFight = new Fight(h,m);
+		Fight theFight = new Fight(h,m);
+
+		theFight.singleHeroAttack();
+
 		theFight.singleMonsterAttack();
 		if(h.getHp() == 0){
 			String laneStr = "";
@@ -530,7 +542,6 @@ public class Quest{
 			h.getRevived();
 			h.setHeroPosition(theMap, 7, (h.getHeroIdx()-1)*3);
 		}
-
 	}
 
 	public void visitMarket(Hero hero){

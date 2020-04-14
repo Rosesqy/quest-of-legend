@@ -44,22 +44,6 @@ public abstract class Hero extends Creatures{
 		// y = 0;
 	}
 
-	// public void setX(int xPos){
-	// 	x = xPos;
-	// }
-
-	// public void setY(int yPos){
-	// 	y = yPos;
-	// }
-
-	// public int getX(){
-	// 	return x;
-	// }
-
-	// public int getY(){
-	// 	return y;
-	// }
-
 	public int getHeroIdx(){
 		return heroIdx;
 	}
@@ -71,10 +55,32 @@ public abstract class Hero extends Creatures{
 	public abstract String getHeroType();
 
 	public void setHeroPosition(WorldMap theMap,int xPos, int yPos){
-		theMap.setCellIsHero(0, x, y);
-		theMap.setCellIsHero(heroIdx, xPos, yPos);
-		x = xPos;
-		y = yPos;
+		leaveHeroPosition(theMap);
+		theMap.setCellIsHero(heroIdx, xPos, yPos); //enter the new cell
+		this.x = xPos;
+		this.y = yPos;
+		String celltype = theMap.getCellLabel(x,y);
+		if(celltype.equals("B")){
+			this.dexterity += this.dexterity*0.1;
+		}else if(celltype.equals("C")){
+			this.agility += this.agility*0.1;
+		}else if(celltype.equals("K")){
+			this.strength += this.strength*0.1;
+		}
+		
+	}
+
+
+	public void leaveHeroPosition(WorldMap theMap){
+		theMap.setCellIsHero(0, x, y); //leave from the previous cell
+		String celltype = theMap.getCellLabel(x,y);
+		if(celltype.equals("B")){
+			this.dexterity -= this.dexterity*0.1;
+		}else if(celltype.equals("C")){
+			this.agility -= this.agility*0.1;
+		}else if(celltype.equals("K")){
+			this.strength -= this.strength*0.1;
+		}
 	}
 
 	public void sellItem(int i){

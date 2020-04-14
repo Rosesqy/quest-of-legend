@@ -23,22 +23,6 @@ public class Monster extends Creatures{
 		monsterIdx = 1;
 	}
 
-	// public int getX(){
-	// 	return x;
-	// }
-
-	// public int getY(){
-	// 	return y;
-	// }
-
-	// public String getName(){
-	// 	return name;
-	// }
-
-	// public int getHp(){
-	// 	return hp;
-	// }
-
 	public void setMonsterPosition(WorldMap theMap,int xPos, int yPos){
 		theMap.setCellIsMonster(0, x, y);
 		theMap.setCellIsMonster(monsterIdx, xPos, yPos);
