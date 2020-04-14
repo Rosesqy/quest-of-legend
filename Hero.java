@@ -253,7 +253,7 @@ public abstract class Hero extends Creatures{
 	}
 
 	public String toString(){
-		return this.getHeroType()+" "+name + " HP:" + hp + " Mana:" + mana+"\n";
+		return this.getHeroType()+" "+name + " HP:" + hp + " Mana:" + mana;
 	}
 
 	public String toStringFull(){
