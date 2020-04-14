@@ -1,0 +1,37 @@
+
+
+Student 1:
+Student 2:
+
+Following is the introduction of the project.
+------------------------------------------------------------
+The process of the game:
+Quest: The class for the main game. It is mainly based on the project for student 1, while the choosen of heros, some actions of heros, and other parts in project of students 2 are added. We modified a lot of part to suit with the actions from single hero and single action. We also added the teleport, back to nexus to the class. 
+Explain: Comes from the student 2, a class stores the tips and string for helping players. We updata it for the new scenes in the quest.
+Fight: The class for the fighting is changed from groups-vs-groups to single-vs-single. Its basic framework comes from student 1, while we added lots of funcions and attribute from student 2.
+
+About Map:
+Worldmap: It comes from the project of student 1, and modified the generate and draw methods to satisfy the requirement.
+Cell: Come from both student 1 and 2, to be a mixture. We add the function to return the index of hero or monster which is on the cell.
+Bush, Cave, Koulo: Three new classes to differentiate cell types. Different type, different gains for heros.
+Block: Another kind of cell which is unaccessable. It is new.
+Nexus: Another kind of cell, on which heros and monsters spawn. It is new.
+Team: A new class proposed in the quest, to represent both the teams of heros and monsters.
+
+About creatrues:
+Creatures: It is a completely new class. Including the attribute for all livings, both monsters and heros.
+Abyss: This class is the same with as the previous implement of student 1. It stores all the information of monsters, and random pick 3 monsters at the turn of monster generating.
+Monster: It comes from both the projects of student 1 and 2. It stores the additional information of monsters.
+Dragon, Exoskeleton.java, Spirit.java: They inherit the monster class, just the same as both of student 1 and 2.
+Pub: It comes from the previous project of student 1. It generates 3 heros at the beginning of the quest.
+Heros: It is a mixture from student 1 and 2. We add the temporary gain from the special cells.
+Paladin, Sorcerer, Warrior: Comes from both student 1 and 2. Three kinds of heros.
+
+About Market and Items:
+Market: It comes from the student 1. We modify the purchase progress to satisfy the single hero action.
+Item: Class represents the items in the game. Just the same as the former quest for both student 1 and 2. We added some functions and interfaces in it.
+Buyable, Sellable: Comes from the project of student 2. They are interfaces.
+Armor, Weapon: Equipment from the item class, the same as both project.
+Spell: Class represents magics. The same sa former projects.
+FireSpell, IceSpell, LightningSpell: The kinds of spells. No change from student 1 and 2.
+Potion: Comes from both student 1 and 2. The same as its former definition.
