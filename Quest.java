@@ -35,6 +35,20 @@ public class Quest{
 		this.createAbyss();
 	}
 
+	public void start(){
+		while (getGameContinue()){
+			heroTeamTurn();
+			monsterTeamTurn();
+			addRound();
+			if(round==8){
+				createAbyss();
+			}
+			if(checkWinEnding()){
+				return;
+			}
+		}
+	}
+
 	public void addRound(){
 		for(Hero h:theHeros){
 			h.addHp((int)(h.getHp()*0.1));
@@ -69,7 +83,7 @@ public class Quest{
 	public void monsterTeamTurn(){
 		boolean inFight = false;
 		for(Monster m:theMons){
-			// System.out.println(m.getName()+"hp"+m.getHp());
+			// System.out.println();
 			if(!m.isDead()){
 				inFight = false;
 				for(Hero h:theHeros){
@@ -85,12 +99,11 @@ public class Quest{
 			}else{
 				return;
 			}
-		}
-		
+		}	
 	}
 
 	public void createAbyss(){
-		System.out.print("Generate the monsters...");
+		System.out.print("\n--------------------\nGenerate some new monsters...");
 		theAbyss = new Abyss();
 		int hilevel = 0;
 		for(Hero h:theHeros){
@@ -103,6 +116,7 @@ public class Quest{
 		for(Monster m:theMons){
 			System.out.println(m);
 		}
+		System.out.println("");
 	}
 
 	public void createStartPoint(){
@@ -176,18 +190,10 @@ public class Quest{
 		System.out.println("done.");
 	}
 
-	public void showWorld(){
-		// theMap.showMap(xPosNow,yPosNow);
-		
+	public void showWorld(){		
 		theMap.showMap(theHeros, theMons);
 	}
 
-	// public void showTeamStatus(){
-	// 	for(int i = 0; i< theHeros.length ; i ++){
-	// 		System.out.print("Hero " + (i+1) + ": ");
-	// 		System.out.println(theHeros[i].toStringFull());
-	// 	}
-	// }
 
 	public void showSingleStatus(Hero hero){
 		System.out.println("Hero " + hero.getHeroIdx() + " status:" + hero.toStringFull()); 
@@ -249,7 +255,6 @@ public class Quest{
 		List<Item> tmpList = hero.getList(i);
 		if(hero.checkShowAnyItem(tmpList)){
 			String errorStr = "Invalid input.";
-			// Scanner scan = new Scanner(System.in);
 			while(true){
 				System.out.print("Choose one item to use(equip) [0-"+(tmpList.size()-1) + "], press other keys to return:");
 				if(!(scan.hasNextInt())){
@@ -270,8 +275,6 @@ public class Quest{
 
 	public boolean heroAction(Hero hero){
 		//Single action for a hero in one round.
-		// theMap.showMap(theHeros,theMons);
-
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";
 		String tipsStr2 = "[Y]Fight monster nearby         [M]Shopping in the nexus";
@@ -293,7 +296,6 @@ public class Quest{
 		String tipsInvalid = "Invalid input. Try another action:";
 		String tipsInFight = "Hero can't pass a monster. Try another action:";
 		String tipsOutFight = "There is no monster nearby. Try another action:";
-		// Scanner scan = new Scanner(System.in);
 		herosMove = false;
 		while(true){
 			String input = scan.next();
@@ -467,15 +469,12 @@ public class Quest{
 	}
 
 	public boolean checkFight(Monster m,Hero h){
-		
 		if(!m.isDead()){	
 			if((h.getX()==m.getX()&&Math.abs(h.getY()-m.getY())<=1) || ((h.getY()==m.getY()&&Math.abs(h.getX()-m.getX())<=1))){
-
 				enemy = m;
 				return true;
 			}
 		}
-		
 		return false;
 	}
 
@@ -544,35 +543,7 @@ public class Quest{
 
 	public static void main(String[] args){
 		Quest theQuest = new Quest();
-		while (theQuest.getGameContinue()){
-			theQuest.heroTeamTurn();
-			theQuest.monsterTeamTurn();
-			theQuest.addRound();
-			if(round==8){
-				theQuest.createAbyss();
-			}
-			if(theQuest.checkWinEnding()){
-				return;
-			}
-		}
-		// 	theQuest.checkInput();
-		// 	if(theQuest.checkFight()){
-		// 		//Heros engage a fight.
-		// 		System.out.println("Monsters appear!");
-		// 		theQuest.startFight();
-		// 		if(theQuest.checkWinEnding()){
-		// 		//Players win the game.
-		// 		System.out.println("*****************************");
-		// 		System.out.println("* Congratulations! You win! *");
-		// 		System.out.println("*****************************");
-		// 		return;
-		// 	}
-		// 	}else if (theQuest.checkMarket()){
-		// 		//Heros visit a market.
-		// 		System.out.println("Heros visit a market.");
-		// 		theQuest.visitMarket();
-		// 	}
-		// }
+		theQuest.start();
 	}
 
 }
