@@ -1,5 +1,6 @@
 // A class represents the monsters.
-public class Monster extends Creatures{
+
+public class Monster extends Creatures implements Attack{
 	
 	int damage;
 	// int defense;
@@ -67,5 +68,23 @@ public class Monster extends Creatures{
 			return true;
 		}
 		return false;
+	}
+
+	public void attack(Creatures hero){
+		System.out.println(this.getName() + " attacks the hero " + hero.getName());
+		double tmp = Math.random();
+		if(tmp < (hero.getAgility()*0.001)){
+			System.out.println(" Miss!");
+			return;
+		}
+		int monsterDamage = this.getDamage();
+		int realDamage = (monsterDamage > hero.getDefense())?( monsterDamage - hero.getDefense()):0;
+		if(realDamage >= hero.getHp()){
+			//The hero faints, the damage overflow.
+			realDamage = hero.getHp();
+		}
+		System.out.println(" Cause " + realDamage + " damage to " + hero.getName() + ".");
+		hero.addHp( -1 * realDamage);
+		return;
 	}
 }
