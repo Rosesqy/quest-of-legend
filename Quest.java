@@ -7,7 +7,7 @@ public class Quest{
 	static WorldMap theMap;
 	static Scanner scan = new Scanner(System.in);
 	static Market theMarket;
-	Fight theFight;
+	// Fight theFight;
 	static Abyss theAbyss;
 	Pub thePub;
 	Hero[] theHeros;
@@ -518,7 +518,10 @@ public class Quest{
 	}
 
 	public void startFight(Monster m, Hero h){
-		theFight = new Fight(h,m);
+		Fight theFight = new Fight(h,m);
+
+		theFight.singleHeroAttack();
+
 		theFight.singleMonsterAttack();
 		if(h.getHp() == 0){
 			String laneStr = "";

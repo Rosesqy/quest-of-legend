@@ -62,6 +62,16 @@ public class Fight{
 		return;
 	}
 
+	public void singleHeroAttack(){
+		
+		if(singleHero.getHp() > 0){
+			System.out.print("Turn of H"+ singleHero.getHeroIdx() + singleHero.getName()+ ":[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
+			this.heroDo(singleHero.getHeroIdx());
+
+		}
+		
+	}
+
 	public void showStatus(){
 		for(int i = 0; i < vsNum ; i ++){
 			System.out.print("Monster " + (i+1) + ": ");
