@@ -11,7 +11,7 @@ public class Pub{
 
 	Pub(){
 		Hero phero;
-		maxNum = 4;
+		maxNum = 5;
 		paladinList = new Hero[maxNum];
 		warriorList = new Hero[maxNum];
 		sorcererList = new Hero[maxNum];
