@@ -1,4 +1,8 @@
-This README file explains how to use the Quest game for CS591.
+Group number: 28
+Student 1: Ziyu Shen
+Student 2: Qingyang Shi
+
+This README file explains how to use the Quest of Legend game for CS591.
 This program is designed to play in terminal mode.
 
 						---- COMPILE AND RUN ON THE COMMAND LINE ----

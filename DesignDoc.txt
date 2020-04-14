@@ -1,9 +1,8 @@
+Group number: 28
+Student 1: Ziyu Shen
+Student 2: Qingyang Shi
 
-
-Student 1:
-Student 2:
-
-Following is the introduction of the project.
+Following is the introduction of the project. (Explanation of each class)
 ------------------------------------------------------------
 The process of the game:
 Quest: The class for the main game. It is mainly based on the project for student 1, while the choosen of heros, some actions of heros, and other parts in project of students 2 are added. We modified a lot of part to suit with the actions from single hero and single action. We also added the teleport, back to nexus to the class. 
