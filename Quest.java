@@ -40,7 +40,7 @@ public class Quest{
 			heroTeamTurn();
 			monsterTeamTurn();
 			addRound();
-			if(round==8){
+			if(round%8 == 0 && round > 0){
 				createAbyss();
 			}
 			if(checkWinEnding()){
@@ -80,27 +80,28 @@ public class Quest{
 		return false;
 	}
 
+
 	public void monsterTeamTurn(){
-		boolean inFight = false;
 		for(Monster m:theMons){
-			// System.out.println();
 			if(!m.isDead()){
-				inFight = false;
 				for(Hero h:theHeros){
 					if(checkFight(m,h)){
-						inFight = true;
+						m.setInFight(true);
 						break;
+					}else{
+						m.setInFight(false);
 					}
 				}
-				if(!inFight){
+				if(!m.getInFight()){
 					if (!theMap.checkNonAccess(m.getX()+1,m.getY(),m))
 					m.setMonsterPosition(theMap,m.getX()+1, m.getY());
 				}
 			}else{
-				return;
+				m.setInFight(false);
 			}
 		}	
 	}
+
 
 	public void createAbyss(){
 		System.out.print("\n--------------------\nGenerate some new monsters...");
@@ -133,7 +134,7 @@ public class Quest{
 	public void createHero(){
 		herosMove = false;
 		int heroNum = 3;
-		System.out.print("Summon the heros...");
+		System.out.println("Summon the heros...");
 		thePub = new Pub();
 		theHeros = thePub.generateHero(heroNum);
 
@@ -305,13 +306,12 @@ public class Quest{
 				this.setGameContinue(false);
 				return true;
 			}else if (input.charAt(0) == 'Y' || input.charAt(0) == 'y'){
+
 				if(!heroCheckInFight(hero)){
 					System.out.print(tipsOutFight);
 					continue;
 				}
-				//##################################
 				//the fight.
-				//##################################
 				else{
 					startFight(enemy, hero);
 					return true;
@@ -469,7 +469,8 @@ public class Quest{
 	}
 
 	public boolean checkFight(Monster m,Hero h){
-		if(!m.isDead()){	
+		if(!m.isDead()){
+			// System.out.println("h" + h.getX()+h.getY()+"m" + m.getX()+m.getY());	
 			if((h.getX()==m.getX()&&Math.abs(h.getY()-m.getY())<=1) || ((h.getY()==m.getY()&&Math.abs(h.getX()-m.getX())<=1))){
 				enemy = m;
 				return true;
