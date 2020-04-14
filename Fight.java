@@ -66,10 +66,104 @@ public class Fight{
 		
 		if(singleHero.getHp() > 0){
 			System.out.print("Turn of H"+ singleHero.getHeroIdx() + singleHero.getName()+ ":[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
-			this.heroDo(singleHero.getHeroIdx());
+			this.singleHeroDo();
 
 		}
 		
+	}
+
+	public void singleHeroDo(){
+		Scanner scan = new Scanner(System.in);
+		while(true){
+			String input = scan.next();
+			if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){
+				if(singleMonster.getHp()>0){
+					System.out.print(singleHero.getName() + " attacks " + singleMonster.getName() + ".");
+					this.heroAttackMonster(singleHero,singleMonster);
+					if(singleMonster.getHp()== 0){
+						System.out.println(singleMonster.getName() + " was defeated!");
+						
+					}
+				}
+				else{
+					for(int j = 0; j < vsNum ; j ++){
+						if(monsterSurvive[j] == 1){
+							System.out.print(singleHero.getName() + " attacks " + theMonsters[j].getName() + ".");
+							this.heroAttackMonster(singleHero,theMonsters[j]);
+							if(theMonsters[j].getHp() == 0){
+								System.out.println(theMonsters[j].getName() + " was defeated!");
+								monsterSurvive[j] = 0;
+							}
+							break;
+						}
+					}
+				}
+				return;
+			}else if (input.charAt(0) == 'S' || input.charAt(0) == 's'){
+				if(singleHero.checkEnoughManaAnySpell() && singleHero.showLearnedSpell()){
+					while(true){
+						System.out.print("Choose which spell to cast [0-" + (singleHero.getLearnSpellNum()-1) + "]:");
+						if(!scan.hasNextInt()){
+							System.out.print("Invalid input. ");
+							continue;
+						}
+						int spellNum = scan.nextInt();
+						if(spellNum < 0 || spellNum > (singleHero.getLearnSpellNum()-1)){
+							System.out.print("Invalid input. ");
+							continue;
+						}
+						if(!singleHero.checkEnoughManaSingleSpell(spellNum))
+							continue;
+						//Cast a spell successfully.
+						Spell useSpell = singleHero.getSingleSpell(spellNum);
+						if(singleMonster.getHp()>0){
+							System.out.print(singleHero.getName() + " casts " + useSpell.getName() + " to " + singleMonster.getName() + ".");
+							this.heroSpellMonster(singleHero, singleMonster, useSpell);
+							if(singleMonster.getHp()== 0){
+								System.out.println(singleMonster.getName() + " was defeated!");
+								
+							}
+						}
+						else{
+							
+								if(singleMonster.getHp()>0){
+									System.out.print(singleHero.getName() + " casts " + useSpell.getName() + " to " + singleMonster.getName() + ".");
+									this.heroSpellMonster(singleHero, singleMonster, useSpell);
+									if(singleMonster.getHp()== 0){
+										System.out.println(singleMonster.getName() + " was defeated!");
+										
+									}
+									break;
+								}
+							
+						}
+						return;
+					}
+				}
+				else
+					System.out.print("[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
+					continue;
+			}else if (input.charAt(0) == 'P' || input.charAt(0) == 'p'){
+				if (this.heroUseItem(singleHero,2))
+					return;
+				System.out.print("[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
+				continue;
+			}else if (input.charAt(0) == 'W' || input.charAt(0) == 'w'){
+				if (this.heroUseItem(singleHero,0))
+					return;
+				System.out.print("[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
+				continue;
+			}else if (input.charAt(0) == 'R' || input.charAt(0) == 'r'){
+				if (this.heroUseItem(singleHero,1))
+					return;
+				System.out.print("[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
+				continue;
+			}else{
+				System.out.print("Invalid action. Try again:[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
+				continue;
+			}
+		}
+	
 	}
 
 	public void showStatus(){
