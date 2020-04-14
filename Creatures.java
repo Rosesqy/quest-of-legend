@@ -44,5 +44,7 @@ public class Creatures{
     
     public int getLevel(){
         return this.level;
-    }
+	}
+	
+	
 }

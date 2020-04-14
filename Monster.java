@@ -1,10 +1,6 @@
 // A class represents the monsters.
 public class Monster extends Creatures{
-	// String name;
-	// int x;
-	// int y;
-	// int level;
-	// int hp;
+	
 	int damage;
 	// int defense;
 	protected float dodgeRate;
@@ -12,14 +8,8 @@ public class Monster extends Creatures{
 
 	Monster(String mName, int mLv, int mDam, int mDef, int mDodge){
 		super(mName, mLv, mDef);
-		// name = mName;
-		// level = mLv;
 		damage = mDam;
-		// defense = mDef;
 		dodgeRate = (float)mDodge/100;
-		// hp = 100 * level;
-		// x = 0;
-		// y = 0;
 		monsterIdx = 1;
 	}
 
@@ -69,5 +59,12 @@ public class Monster extends Creatures{
 			System.out.println("Reduces " + (-1*adDR) + " dodge rate of " + name + ".");
 		}
 		dodgeRate = dodgeRate + adDR;
+	}
+
+	public boolean isDead(){
+		if(this.hp <= 0){
+			return true;
+		}
+		return false;
 	}
 }
