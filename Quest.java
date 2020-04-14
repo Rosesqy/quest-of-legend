@@ -274,8 +274,8 @@ public class Quest{
 
 		String tipsEdge = "----------------------------------------------------------------------------";
 		String tipsStr1 = "[W]Move Up     [S]Move Down     [A]Move left     [D]Move right     [Z]Status";
-		String tipsStr2 = "[Y]Attack      [U]Cast a spell  [M]Shopping in the nexus";
-		String tipsStr3 = "[T]Teleport    [I]Info         [B]Back to nexus [Q]Quit the game";
+		String tipsStr2 = "[Y]Fight monster nearby         [M]Shopping in the nexus";
+		String tipsStr3 = "[T]Teleport    [I]Info          [B]Back to nexus [Q]Quit the game";
 		String tipsInput = "What will you do? Enter your action (the first letter):";
 		System.out.println(tipsEdge);
 		System.out.println("Hero " + hero.getHeroIdx() + ": " + hero.getName());
@@ -308,21 +308,12 @@ public class Quest{
 					continue;
 				}
 				//##################################
-				//the attack.
+				//the fight.
 				//##################################
 				else{
 					startFight(enemy, hero);
 					return true;
 				}
-			}else if (input.charAt(0) == 'U' || input.charAt(0) == 'u'){
-				if(!heroCheckInFight(hero)){
-					System.out.print(tipsOutFight);
-					continue;
-				}
-				//##################################
-				//casting spell.
-			    //##################################
-				return true;
 			}else if (input.charAt(0) == 'Z' || input.charAt(0) == 'z'){
 				//Show the heros team status.
 				this.showSingleStatus(hero);
@@ -553,7 +544,6 @@ public class Quest{
 
 	public static void main(String[] args){
 		Quest theQuest = new Quest();
-		// theQuest.showWorld();
 		while (theQuest.getGameContinue()){
 			theQuest.heroTeamTurn();
 			theQuest.monsterTeamTurn();
