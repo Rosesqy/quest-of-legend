@@ -9,7 +9,8 @@ public class Quest{
 	static Market theMarket;
 	// Fight theFight;
 	static Abyss theAbyss;
-	Pub thePub;
+	static Pub thePub;
+	
 	Hero[] theHeros;
 
 	Team team = new Team();
@@ -18,11 +19,11 @@ public class Quest{
 
 	int xPosNow;
 	int yPosNow;
-	String herosSign = "H"; //"H" represents the current location of heros on the world map.
+	// String herosSign = "H"; //"H" represents the current location of heros on the world map.
 	boolean continueFlag;
 	boolean herosMove;
-	double engageFightRate = 0.2;
-	static int round;
+	// double engageFightRate = 0.2;
+	int round;
 
 	public Quest(){
 		System.out.println("Welcome to the Great Quest!");
@@ -128,58 +129,57 @@ public class Quest{
 	public void createMap(){
 		theMap = new WorldMap();
 		theMap.createMap();
-		//theMap.showMap(theHeros, theMons);
 	}
 
 	public void createHero(){
 		herosMove = false;
 		int heroNum = 3;
+
+		theHeros = new Hero[heroNum];
+
 		System.out.println("Summon the heros...");
-		thePub = new Pub();
-		theHeros = thePub.generateHero(heroNum);
+		//use pub
+		// thePub = new Pub();
+		// theHeros = thePub.generateHero(heroNum);
 
+		//use Explain
+		ArrayList<Hero> allheroes = new ArrayList<Hero>();
+		System.out.println("\nchoose your 3 heroes");
+		Explain.showHero(allheroes);
+		do{
+			boolean hasHero = false;
+			boolean included = false;
+			try {
+				System.out.println("\nEnter the hero's name: ");
+				String name = scan.next();
+				for (Hero hero:allheroes){
+					if(hero.name.equals(name)){
+						if(team.getSize()>=1){
+							included = team.checkrepeat(name);
+						}
+						if(!included){
+							System.out.println("valid name");
+							team.add(hero);	
+						}
+						hasHero = true;
+						break;
+					}
+				}
+				if(!hasHero||included){
+					System.out.println("we dont have this guy or you've selected him/her");
+					continue;
+				}	
+			}catch (Exception e) {
+				System.err.println("Invalid. Error: " + e.getMessage());
+				continue;
+			}
+		}while(team.getSize() < 3);
+		System.out.println("done.");
+		theHeros = team.getTeam().toArray(theHeros);
 
-		// ArrayList<Hero> allheroes = new ArrayList<Hero>();
-		// System.out.println("\nchoose your 3 heroes");
-		// Explain.showHero(allheroes);
-		// do{
-		// 	boolean hasHero = false;
-		// 	boolean included = false;
-		// 	try {
-		// 		System.out.println("\nEnter the hero's name: ");
-		// 		String name = scan.next();
-		// 		for (Hero hero:allheroes){
-		// 			if(hero.name.equals(name)){
-		// 				if(team.getSize()>=1){
-		// 					included = team.checkrepeat(name);
-		// 				}
-		// 				if(!included){
-		// 					System.out.println("valid name");
-		// 					team.add(hero);	
-		// 				}
-		// 				hasHero = true;
-		// 				break;
-		// 			}
-		// 		}
-		// 		if(!hasHero||included){
-		// 			System.out.println("we dont have this guy or you've selected him/her");
-		// 			continue;
-		// 		}	
-		// 	}catch (Exception e) {
-		// 		System.err.println("Invalid. Error: " + e.getMessage());
-		// 		continue;
-		// 	}
-		// }while(team.getSize() < 3);
-		// System.out.println("done.");
-		// Explain.showTeam(team.getTeam());
-		// theHeros = team.getTeam().toArray(theHeros);
-
-
-		// for(int i = 0; i < heroNum; i++){
-		// 	System.out.println(theHeros[i].getHeroType() + ", " + theHeros[i].getName());
-		// }
 		for(int i=0;i<heroNum;i++){
 			System.out.println(theHeros[i]);
+			theHeros[i].setHeroIdx(i+1);
 			theHeros[i].setY(i*3);
 		}
 		System.out.println("Join the team.");
@@ -194,7 +194,6 @@ public class Quest{
 	public void showWorld(){		
 		theMap.showMap(theHeros, theMons);
 	}
-
 
 	public void showSingleStatus(Hero hero){
 		System.out.println("Hero " + hero.getHeroIdx() + " status:" + hero.toStringFull()); 
@@ -306,7 +305,6 @@ public class Quest{
 				this.setGameContinue(false);
 				return true;
 			}else if (input.charAt(0) == 'Y' || input.charAt(0) == 'y'){
-
 				if(!heroCheckInFight(hero)){
 					System.out.print(tipsOutFight);
 					continue;
