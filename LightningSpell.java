@@ -1,6 +1,6 @@
 public class LightningSpell extends Spell{
 //A class represents Lightning spells, a kind of spells.
-	LightningSpell(String sname, int sprice, int sreLv, int sdamage, int scostMana){
+	public LightningSpell(String sname, int sprice, int sreLv, int sdamage, int scostMana){
 		super(sname, sprice, sreLv, sdamage, scostMana);
 	}
 

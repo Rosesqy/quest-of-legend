@@ -2,12 +2,12 @@
 
 public class Monster extends Creatures implements Attack{
 	
-	int damage;
+	protected int damage;
 	// int defense;
 	protected float dodgeRate;
-	int monsterIdx;
+	protected int monsterIdx;
 
-	Monster(String mName, int mLv, int mDam, int mDef, int mDodge){
+	public Monster(String mName, int mLv, int mDam, int mDef, int mDodge){
 		super(mName, mLv, mDef);
 		damage = mDam;
 		dodgeRate = (float)mDodge/100;

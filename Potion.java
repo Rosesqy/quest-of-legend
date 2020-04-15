@@ -3,11 +3,11 @@ public class Potion extends Item{
 
 	int statis;//0:hp  1:str 2:mana 3:agi 4:dex 5:exp
 
-	Potion(String pname, int pprice, int preLv, int pvalue){
+	public Potion(String pname, int pprice, int preLv, int pvalue){
 		super(pname, pprice, preLv, pvalue);
 	}
 
-	Potion(String pname, int pprice, int preLv, int pvalue, int pstat){
+	public Potion(String pname, int pprice, int preLv, int pvalue, int pstat){
 		super(pname, pprice, preLv, pvalue);
 		statis = pstat;
 	}

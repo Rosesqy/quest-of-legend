@@ -1,6 +1,6 @@
 public class IceSpell extends Spell{
 //A class represents Ice spells, a kind of spells.
-	IceSpell(String sname, int sprice, int sreLv, int sdamage, int scostMana){
+	public IceSpell(String sname, int sprice, int sreLv, int sdamage, int scostMana){
 		super(sname, sprice, sreLv, sdamage, scostMana);
 	}
 	

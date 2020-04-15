@@ -260,7 +260,7 @@ public abstract class Hero extends Creatures implements Attack{
 	}
 
 	public String toString(){
-		return this.getHeroType()+" "+name + " HP:" + hp + " Mana:" + mana;
+		return name + " HP:" + hp + " Mana:" + mana;
 	}
 
 	public String toStringFull(){
