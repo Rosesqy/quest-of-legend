@@ -1,21 +1,14 @@
 // A class represents the heros.
 import java.util.*;
 
-public abstract class Hero extends Creatures{
-
-	// protected String name;
-	// protected int x;
-	// protected int y;
+public abstract class Hero extends Creatures implements Attack{
 	protected int heroIdx;
-	// protected int level;
-	// protected int hp;
 	protected int mana;
 	protected int strength;
 	protected int dexterity;
 	protected int agility;
 	protected int money;
 	protected int experience;
-	// protected int defense;
 	protected int weaponDamage;
 	List<Spell> learnedSpell;
 	List<Item> ownedWeapon;
@@ -24,9 +17,7 @@ public abstract class Hero extends Creatures{
 
 	public Hero(String hName, int hMana, int hStr, int hAgi, int hDex, int hMoney, int hExp, int hIdx){
 		super(hName, 1, 0);
-		// name = hName;
 		level = 1;
-		// hp = 100 * level;
 		mana = hMana;
 		strength = hStr;
 		agility = hAgi;
@@ -70,7 +61,6 @@ public abstract class Hero extends Creatures{
 		
 	}
 
-
 	public void leaveHeroPosition(WorldMap theMap){
 		theMap.setCellIsHero(0, x, y); //leave from the previous cell
 		String celltype = theMap.getCellLabel(x,y);
@@ -82,6 +72,23 @@ public abstract class Hero extends Creatures{
 			this.strength -= this.strength*0.1;
 		}
 	}
+
+	public void attack(Creatures monster){
+		double tmp = Math.random();
+		if(tmp < monster.getDodgeRate()){
+			System.out.println(" Miss!");
+			return;
+		}
+		int heroDamage = this.getAttackDamage();
+		int realDamage = (heroDamage > monster.getDefense())?( heroDamage - monster.getDefense()):0;
+		if(realDamage >= monster.getHp()){
+			//Beat the monster, the damage overflow.
+			realDamage = monster.getHp();
+		}
+		monster.addHp( -1 * realDamage);
+		System.out.println(" Cause " + realDamage + " damage to " + monster.getName() + ".");
+	}
+
 
 	public void sellItem(int i){
 		List<Item> itemList = this.getList(i);
@@ -269,7 +276,7 @@ public abstract class Hero extends Creatures{
 	}
 
 	public void usePotion(){
-
+		
 	}
 
 	public void changeEquip(){
@@ -291,44 +298,36 @@ public abstract class Hero extends Creatures{
 		mana = (int)(mana * 1.1);
 	}
 
-	// public String getName(){
-	// 	return name;
-	// }
-
-	// public int getLevel(){
-	// 	return level;
-	// }
-
 	public int getHp(){
-		return hp;
+		return this.hp;
 	}
 
 	public int getMana(){
-		return mana;
+		return this.mana;
 	}
 
 	public int getStrength(){
-		return strength;
+		return this.strength;
 	}
 
 	public int getDexterity(){
-		return dexterity;
+		return this.dexterity;
 	}
 
 	public int getAgility(){
-		return agility;
+		return this.agility;
 	}
 
 	public int getMoney(){
-		return money;
+		return this.money;
 	}
 	
 	public int getExperience(){
-		return experience;
+		return this.experience;
 	}
 
 	public int getDefense(){
-		return defense;
+		return this.defense;
 	}
 
 	public void addHp(int adHp){
