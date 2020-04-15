@@ -13,7 +13,11 @@ public class Team{
     }
 
     public void add(Hero h){
+        this.team.add(h);
+    }
 
+    public void addAll(Hero[] hs){
+        Collections.addAll(this.team, hs);
     }
 
     public boolean checkrepeat(String name){
@@ -31,6 +35,6 @@ public class Team{
     }
 
     public Hero get(int i){
-        return team.get(i);
+        return this.team.get(i);
     }
 }
