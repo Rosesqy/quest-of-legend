@@ -40,63 +40,112 @@ public class Market{
 			String str;
 			String line[];
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			str = bf.readLine();
+			do{
+				if(str == null)
+					break;
 				line = str.split("\\s+");
 				pspell = new IceSpell(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
 				spellList.add(pspell);
-			}
+			}while ((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	pspell = new IceSpell(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
+			// 	spellList.add(pspell);
+			// }
 			ir.close();
 			is = new FileInputStream("The_Quest/FireSpells.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			str = bf.readLine();
+			do{
+				if(str == null)
+					break;
 				line = str.split("\\s+");
 				pspell = new FireSpell(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
 				spellList.add(pspell);
-			}
+			}while((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	pspell = new FireSpell(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
+			// 	spellList.add(pspell);
+			// }
 			ir.close();
 			is = new FileInputStream("The_Quest/LightningSpells.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			str = bf.readLine();
+			do{
+				if(str == null)
+					break;
 				line = str.split("\\s+");
 				pspell = new LightningSpell(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
 				spellList.add(pspell);
-			}
+			}while((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	pspell = new LightningSpell(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
+			// 	spellList.add(pspell);
+			// }
 			ir.close();
 			is = new FileInputStream("The_Quest/Weaponry.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			str = bf.readLine();
+			do{
+				if(str == null)
+					break;
 				line = str.split("\\s+");
 				pitem = new Weapon(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
 				weaponList.add(pitem);
-			}
+			}while ((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	pitem = new Weapon(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
+			// 	weaponList.add(pitem);
+			// }
 			ir.close();
 			is = new FileInputStream("The_Quest/Armory.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			str = bf.readLine();
+			do{
+				if(str == null)
+					break;
 				line = str.split("\\s+");
 				pitem = new Armor(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]));
 				armorList.add(pitem);
-			}
+			}while ((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	pitem = new Armor(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]));
+			// 	armorList.add(pitem);
+			// }
 			ir.close();
 			is = new FileInputStream("The_Quest/Potions.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
+			str = bf.readLine();
 			int k = 0;
-			while ((str = bf.readLine()) != null) {
+			do{
+				if(str == null)
+					break;
 				line = str.split("\\s+");
 				pitem = new Potion(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]),k);
 				potionList.add(pitem);
 				k ++;
-			}
+			}while ((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	pitem = new Potion(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]),k);
+			// 	potionList.add(pitem);
+			// 	k ++;
+			// }
 			bf.close();
 			ir.close();
 		} catch (IOException e){
@@ -116,7 +165,7 @@ public class Market{
 
 	public void visitMarket(Hero hero){
 		String mainTipsStr = "What you want to do? [B]Buy   [S]Sell   [L]Leave the market:";
-		while(true){
+		do{
 			System.out.print(mainTipsStr);
 			String input = scan.next();
 			if (input.charAt(0) == 'B' || input.charAt(0) == 'b'){
@@ -132,13 +181,13 @@ public class Market{
 			}else{
 				System.out.print("Invalid action. ");
 			}
-		}
+		}while(true);
 	}
 
 	public void sellMainMenu(Hero hero){
 		String errorStr = "Invalid input.";
 		String sellTipsStr = "Which one? [P]Potion  [A]Armor  [W]Weapon  [B]Back to market:";
-		while(true){
+		do{
 			System.out.print(sellTipsStr);
 			String input = scan.next();
 			if (input.charAt(0) == 'P' || input.charAt(0) == 'p'){
@@ -155,12 +204,12 @@ public class Market{
 			}else{
 				System.out.print(errorStr);
 			}
-		}
+		}while(true);
 	}
 
 	public void buyMainMenu(Hero hero){
 		String buyTipsStr = "Which one? [S]Spell  [P]Potion  [A]Armor  [W]Weapon  [B]Back to market:";
-		while(true){
+		do{
 			System.out.print(buyTipsStr);
 			String input = scan.next();
 			if (input.charAt(0) == 'S' || input.charAt(0) == 's'){
@@ -180,13 +229,13 @@ public class Market{
 			}else{
 				System.out.print("Invalid action. ");
 			}
-		}
+		}while(true);
 	}
 
 	public void buyItem(Hero hero, List<Item> itemList){
 		String buyTipsStr = "Choose one to buy, using its sequence number [0-" + (itemList.size()-1) + "], press other keys to return:";
 		String errorStr = "Invalid input.";
-		while(true){
+		do{
 			this.showItemList(itemList);
 			System.out.print(buyTipsStr);
 			if(!(scan.hasNextInt())){
@@ -206,7 +255,7 @@ public class Market{
 			}
 			System.out.println("-------------------------------------------------------------------------");
 			continue;
-		}
+		}while(true);
 	}
 
 	public boolean heroBuyItem(Hero hero, Item item){
@@ -232,7 +281,7 @@ public class Market{
 	public void buySpell(Hero hero){
 		String buySpellTipsStr;
 		String errorStr = "Invalid input.";
-		while(true){
+		do{
 			if (spellList.size() == 0){
 				//No spell in the spellList.
 				System.out.println("The heros have learned all the spells!");
@@ -241,7 +290,7 @@ public class Market{
 			this.showSpellList();
 			buySpellTipsStr = "Choose one spell to buy, using its sequence number [0-" + (spellList.size()-1) + "], press other keys to return:";
 			System.out.print(buySpellTipsStr);
-			while(!(scan.hasNextInt())) {
+			if(!(scan.hasNextInt())) {
 				return;
 				}
 			int buyNum = scan.nextInt();
@@ -258,7 +307,7 @@ public class Market{
 			}
 			System.out.println("-------------------------------------------------------------------------");
 			continue;
-		}
+		}while(true);
 	}
 
 	public boolean heroBuySpell(Hero hero, Spell spell){

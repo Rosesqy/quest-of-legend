@@ -1,7 +1,7 @@
 public class Potion extends Item{
 //A class represent potions, one-use items.
 
-	int statis;//0:hp  1:str 2:mana 3:agi 4:dex 5:exp
+	private int statis;//0:hp  1:str 2:mana 3:agi 4:dex 5:exp
 
 	public Potion(String pname, int pprice, int preLv, int pvalue){
 		super(pname, pprice, preLv, pvalue);

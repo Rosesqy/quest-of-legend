@@ -22,31 +22,43 @@ public class Abyss{
 			String str;
 			String line[];
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			bf.readLine();
+			do{
+				if ((str = bf.readLine()) == null)
+					break;
 				line = str.split("\\s+");
 				pmonster = new Dragon(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
-				dragonList[Integer.parseInt(line[1])-1] = pmonster;
-			}
+				dragonList[(Integer.parseInt(line[1]))-1] = pmonster;
+			}while((str = bf.readLine()) != null);
+
 			ir.close();
 			is = new FileInputStream("The_Quest/Spirits.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			bf.readLine();
+			do{
+				if ((str = bf.readLine()) == null)
+					break;
 				line = str.split("\\s+");
 				pmonster = new Spirit(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
 				spiritList[(Integer.parseInt(line[1]))-1] = pmonster;
-			}
+			}while((str = bf.readLine()) != null);
+			
 			ir.close();
 			is = new FileInputStream("The_Quest/Exoskeletons.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			bf.readLine();
+			do{
+				if ((str = bf.readLine()) == null)
+					break;
 				line = str.split("\\s+");
 				pmonster = new Exoskeleton(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
-				skeletonList[(Integer.parseInt(line[1]))-1] = pmonster;
-			}
+				skeletonList[(Integer.parseInt(line[1]))-2] = pmonster;
+			}while((str = bf.readLine()) != null);
+			
 			bf.close();
 			ir.close();
 		} catch (IOException e){

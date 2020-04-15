@@ -18,7 +18,9 @@ public class Explain{
                 File info = new File( path + "the_Quest/"+l+".txt");
                 Scanner reader = new Scanner(info);
                 System.out.println(reader.nextLine());
-                while(reader.hasNextLine()){
+                do{
+                    if(!reader.hasNextLine())
+                        break;
                     p = reader.nextLine();
                     if(p.trim().length()>0){
                         System.out.println(p);
@@ -36,7 +38,26 @@ public class Explain{
                                 break;
                         }   
                     }
-                }
+                }while(reader.hasNextLine());
+                // while(reader.hasNextLine()){
+                //     p = reader.nextLine();
+                //     if(p.trim().length()>0){
+                //         System.out.println(p);
+                //         n = p.split("\\s+");
+                //         switch(l){
+                //             case "Warriors":
+                //                 allheroes.add(new Warrior(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4]),Integer.parseInt(n[5]),Integer.parseInt(n[6]),0));
+                                
+                //                 break;
+                //             case "Sorcerers":
+                //                 allheroes.add(new Sorcerer(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4]),Integer.parseInt(n[5]),Integer.parseInt(n[6]),0));
+                //                 break;
+                //             case "Paladins":
+                //                 allheroes.add(new Paladin(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4]),Integer.parseInt(n[5]),Integer.parseInt(n[6]),0));
+                //                 break;
+                //         }   
+                //     }
+                // }
                 reader.close();
             }catch(Exception e){
                 System.out.println("error here: "+e.getMessage());
@@ -73,7 +94,9 @@ public class Explain{
                 File info = new File( path + "the_Quest/"+l+".txt");
                 Scanner reader = new Scanner(info);
                 reader.nextLine();
-                while(reader.hasNextLine()){
+                do{
+                    if(!reader.hasNextLine())
+                        break;
                     p = reader.nextLine();
                     if(p.trim().length()>0){
                         n = p.split("\\s+");
@@ -98,7 +121,33 @@ public class Explain{
                                 break;
                         }   
                     }
-                }
+                }while(reader.hasNextLine());
+                // while(reader.hasNextLine()){
+                //     p = reader.nextLine();
+                //     if(p.trim().length()>0){
+                //         n = p.split("\\s+");
+                //         switch(l){
+                //             case "Weaponry":
+                //                 mktweapon.add(new Weapon(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4])));
+                //                 break;
+                //             case "Armory":
+                //                 mktarm.add(new Armor(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3])));
+                //                 break;
+                //             case "Potions":
+                //                 mktpotion.add(new Potion(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3])));
+                //                 break;
+                //             case "FireSpells":
+                //                 mktfspell.add(new FireSpell(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4])));
+                //                 break;
+                //             case "IceSpells":
+                //                 mktispell.add(new IceSpell(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4])));
+                //                 break;
+                //             case "LightningSpells":
+                //                 mktlspell.add(new LightningSpell(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4])));
+                //                 break;
+                //         }   
+                //     }
+                // }
                 reader.close();
             }catch(Exception e){
                 System.out.println("error here: "+e.getMessage());
@@ -116,7 +165,9 @@ public class Explain{
                 File info = new File( path + "the_Quest/"+l+".txt");
                 Scanner reader = new Scanner(info);
                 reader.nextLine();
-                while(reader.hasNextLine()){
+                do{
+                    if(!reader.hasNextLine())
+                        break;
                     p = reader.nextLine();
                     if(p.trim().length()>0){
                         n = p.split("\\s+");
@@ -132,7 +183,24 @@ public class Explain{
                                 break;
                         }   
                     }
-                }
+                }while(reader.hasNextLine());
+                // while(reader.hasNextLine()){
+                //     p = reader.nextLine();
+                //     if(p.trim().length()>0){
+                //         n = p.split("\\s+");
+                //         switch(l){
+                //             case "Dragons":
+                //                 allmonsters.add(new Dragon(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4])));
+                //                 break;
+                //             case "Exoskeletons":
+                //                 allmonsters.add(new Exoskeleton(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4])));
+                //                 break;
+                //             case "Spirits":
+                //                 allmonsters.add(new Spirit(n[0],Integer.parseInt(n[1]), Integer.parseInt(n[2]),Integer.parseInt(n[3]),Integer.parseInt(n[4])));
+                //                 break;
+                //         }   
+                //     }
+                // }
                 reader.close();
             }catch(Exception e){
                 System.out.println("error here: "+e.getMessage());
