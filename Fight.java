@@ -141,22 +141,6 @@ public class Fight{
 		return false;
 	}
 
-	// public void heroSpellMonster(Hero hero, Monster monster, Spell spell){
-	// 	hero.addMana(-1*(spell.getCostMana()));
-	// 	int realDamage = (int)((((float)(hero.getDexterity())/10000)+1)*spell.getDamage());
-	// 	//The spell damage is the real damage.
-	// 	if(realDamage >= monster.getHp()){
-	// 		//Beat the monster, the damage overflow.
-	// 		realDamage = monster.getHp();
-	// 		monster.addHp( -1 * realDamage);
-	// 		System.out.print(" Cause " + realDamage + " damage to " + monster.getName() + ". ");
-	// 		return;
-	// 	}
-	// 	monster.addHp( -1 * realDamage);
-	// 	System.out.print(" Cause " + realDamage + " damage to " + monster.getName() + ". ");
-	// 	spell.deterioration(monster);
-	// }
-
 	public void fightReward(){
 		if(singleHero.getHp()>0){
 			singleHero.addMoney(150);
