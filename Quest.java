@@ -187,7 +187,8 @@ public class Quest{
 
 	public void createMarket(){
 		System.out.print("Build the market...");
-		theMarket = new Market(theHeros);
+		// theMarket = new Market(theHeros);
+		theMarket = new Market();
 		System.out.println("done.");
 	}
 
