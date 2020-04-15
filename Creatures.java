@@ -57,5 +57,21 @@ public class Creatures{
 	public boolean getInFight(){
 		return this.inFight;
 	}
+
+	public int getDefense(){
+		return 0;
+	}
+
+	public int getAgility(){
+		return 0;
+	}
+
+	public void addHp(int extrahp){
+		return;
+	}
+
+	public float getDodgeRate(){
+		return 0;
+	}
 	
 }
