@@ -5,7 +5,7 @@ public class Weapon extends Item{
 
 	int requiredHand;
 
-	Weapon(String wname, int wprice, int wreLv, int wvalue, int wreHand){
+	public Weapon(String wname, int wprice, int wreLv, int wvalue, int wreHand){
 		super(wname, wprice, wreLv, wvalue);
 		requiredHand = wreHand;
 	}

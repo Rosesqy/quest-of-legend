@@ -6,17 +6,17 @@ public class WorldMap{
 	private double commonCellRate;
 	private double bushCellRate;
 	private double koulouCellRate;
-	private double caveCellRate;
+	// private double caveCellRate;
 	private int size;
 	private Cell [][] mapCell;
-	private String mapEdge;
+	// private String mapEdge;
 	
 	public WorldMap(){
 		size = 8;
 		commonCellRate = 0.4;
 		bushCellRate = 0.2;
 		koulouCellRate = 0.2;
-		caveCellRate = 0.2;
+		// caveCellRate = 0.2;
 	}
 
 	public int getCellIsHero(int xPos, int yPos){
@@ -46,31 +46,7 @@ public class WorldMap{
 	public void createMap(){
 		System.out.print("Create the world...");
 		mapCell = new Cell [size][size];
-		int totalSize = size*size;
-		// List <String> labelCell = new ArrayList<String>();
-		// for(int i = 0; i < totalSize; i++){
-		// 	if (( i%8 == 2 )||( i%8 == 5))
-		// 		labelCell.add("I");
-		// 	else if(( i < 8 )||( i > 55))
-		// 		labelCell.add("N");
-		// 	else {
-		// 		double tmp = Math.random();
-		// 		if (tmp < commonCellRate)
-		// 			labelCell.add("P");
-		// 		else if (tmp < (commonCellRate + bushCellRate))
-		// 			labelCell.add("B");
-		// 		else if (tmp < (commonCellRate + bushCellRate + koulouCellRate))
-		// 			labelCell.add("K");
-		// 		else
-		// 			labelCell.add("C");
-		// 	}
-		// }
-		// for (int i = 0; i < size ; i++){
-		// 	for (int j = 0; j < size ; j++){
-		// 		mapCell[i][j] = new Cell(labelCell.get(size*i+j));
-		// 	}
-		// }
-		
+		// int totalSize = size*size;
 		
 		for (int i = 0; i < size ; i++){
 			for (int j = 0; j < size ; j++){
@@ -111,7 +87,6 @@ public class WorldMap{
 					}
 				}
 				for(int m = 1;m<=monsters.size();m++){
-					// System.out.println(monsters.get(m-1).getX()+monsters.get(m-1).getY());
 					if(monsters.get(m-1).getX()==i && monsters.get(m-1).getY()==j){
 						if(monsters.get(m-1).isDead()){
 							mapCell[i][j].setIsMonster(-1);
@@ -135,8 +110,7 @@ public class WorldMap{
 						middle = middle + "|    ";
 					}
 					middle = middle + "   |  ";
-				}
-									
+				}					
 			}
 			System.out.println(line);
 			System.out.println(middle);

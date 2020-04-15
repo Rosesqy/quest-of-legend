@@ -3,7 +3,7 @@ public class Warrior extends Hero{
 
 	String heroType;
 
-	Warrior(String hName, int hMana, int hStr,int hAgi, int hDex,  int hMoney, int hExp, int hIdx){
+	public Warrior(String hName, int hMana, int hStr,int hAgi, int hDex,  int hMoney, int hExp, int hIdx){
 		super(hName, hMana, hStr, hAgi, hDex, hMoney, hExp, hIdx);
 		heroType = "Warrior";
 	}

@@ -1,13 +1,13 @@
 public class Dragon extends Monster{
 // A class represents dragons, a kind of monster.
-	String monsterType;
+	private String monsterType;
 
-	Dragon(String mName, int mLv, int mDam, int mDef, int mDodge){
+	public Dragon(String mName, int mLv, int mDam, int mDef, int mDodge){
 		super(mName, mLv, mDam, mDef, mDodge);
-		monsterType = "Dragon";
+		this.monsterType = "Dragon";
 	}
 
 	public String toString(){
-		return "(" + monsterType + ")" + super.toString();
+		return "(" + this.monsterType + ")" + super.toString();
 	}
 }

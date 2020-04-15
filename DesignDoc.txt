@@ -2,12 +2,12 @@ Group number: 28
 Student 1: Ziyu Shen
 Student 2: Qingyang Shi
 
-Following is the introduction of the project. (Explanation of each class)
+Following is the Explanation of each class
 ------------------------------------------------------------
 The process of the game:
-Quest: The class for the main game. It is mainly based on the project for student 1, while the choosen of heros, some actions of heros, and other parts in project of students 2 are added. We modified a lot of part to suit with the actions from single hero and single action. We also added the teleport, back to nexus to the class. 
-Explain: Comes from the student 2, a class stores the tips and string for helping players. We updata it for the new scenes in the quest.
-Fight: The class for the fighting is changed from groups-vs-groups to single-vs-single. Its basic framework comes from student 1, while we added lots of funcions and attribute from student 2.
+Quest: The class for the main game. It is mainly based on the project for student 1, while the choosen of heros, some actions of heros, and other parts in project of students 2 are added. We modified a lot in this part to because now in each around we have to deal with actions from a single hero and a single monster. We also added actions like Teleport, Back to nexus to the class. 
+Explain: Comes from student 2, a class stores the tips and string for helping players. Not fully used because some functions have been written by student 1 in his previous works. But some return value is changed to fit the new Quest class.
+Fight: The class for the fighting is changed from groups-vs-groups to single-vs-single. Its basic framework comes from student 1, while we added lots of funcions and attribute from student 2. Also, the "hero attack monster" and "monster attack hero" methods are deleted because we think this two attack methods should be put in the hero and monster class as attack is an action of them.
 
 About Map:
 Worldmap: It comes from the project of student 1, and modified the generate and draw methods to satisfy the requirement.
@@ -25,6 +25,7 @@ Dragon, Exoskeleton.java, Spirit.java: They inherit the monster class, just the 
 Pub: It comes from the previous project of student 1. It generates 3 heros at the beginning of the quest.
 Heros: It is a mixture from student 1 and 2. We add the temporary gain from the special cells.
 Paladin, Sorcerer, Warrior: Comes from both student 1 and 2. Three kinds of heros.
+Attack: Interfaces that includes an attack(Creatures creature) method. Implemented by both Hero and Monster classes.
 
 About Market and Items:
 Market: It comes from the student 1. We modify the purchase progress to satisfy the single hero action.

@@ -3,7 +3,7 @@ import java.util.*;
 public class Armor extends Item{
 //A class represents armors, which can reduce the damage from the monsters.
 
-	Armor(String wname, int wprice, int wreLv, int wvalue){
+	public Armor(String wname, int wprice, int wreLv, int wvalue){
 		super(wname, wprice, wreLv, wvalue);
 	}
 

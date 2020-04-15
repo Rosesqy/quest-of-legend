@@ -6,6 +6,8 @@ public class Creatures{
 	protected int y;
 	protected int level;
 	protected int hp;
+
+	protected boolean inFight;
 	
 	protected int defense;
     
@@ -15,7 +17,9 @@ public class Creatures{
         this.defense = cDef;
         this.hp = 100*cLv;
         this.x = 0;
-        this.y = 0;
+		this.y = 0;
+		
+		this.inFight = false;
     }
 
 	public void setX(int xPos){
@@ -46,5 +50,28 @@ public class Creatures{
         return this.level;
 	}
 	
+	public void setInFight(boolean fight){
+		this.inFight = fight;
+	}
+
+	public boolean getInFight(){
+		return this.inFight;
+	}
+
+	public int getDefense(){
+		return 0;
+	}
+
+	public int getAgility(){
+		return 0;
+	}
+
+	public void addHp(int extrahp){
+		return;
+	}
+
+	public float getDodgeRate(){
+		return 0;
+	}
 	
 }
