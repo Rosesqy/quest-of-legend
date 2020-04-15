@@ -37,7 +37,9 @@ public class Quest{
 	}
 
 	public void start(){
-		while (getGameContinue()){
+		do{
+			if(!getGameContinue())
+				break;
 			heroTeamTurn();
 			monsterTeamTurn();
 			addRound();
@@ -47,7 +49,18 @@ public class Quest{
 			if(checkWinEnding()){
 				return;
 			}
-		}
+		}while(getGameContinue());
+		// while (getGameContinue()){
+		// 	heroTeamTurn();
+		// 	monsterTeamTurn();
+		// 	addRound();
+		// 	if(round%8 == 0 && round > 0){
+		// 		createAbyss();
+		// 	}
+		// 	if(checkWinEnding()){
+		// 		return;
+		// 	}
+		// }
 	}
 
 	public void addRound(){
@@ -61,7 +74,9 @@ public class Quest{
 	public void heroTeamTurn(){
 		System.out.println("Round " + round + " for Heros:");
 		int i = 0;
-		while(i < 3 && continueFlag){
+		if (continueFlag == false)
+			return;
+		do{
 			showWorld();
 			if(heroAction(theHeros[i])){
 				if (!continueFlag)
@@ -70,7 +85,18 @@ public class Quest{
 			}
 			else
 				continue;
-		}
+		}while(i < 3 && continueFlag);
+
+		// while(i < 3 && continueFlag){
+		// 	;showWorld();
+		// 	if(heroAction(theHeros[i])){
+		// 		if (!continueFlag)
+		// 			break;
+		// 		i ++;
+		// 	}
+		// 	else
+		// 		continue
+		// }
 	}
 
 	public boolean heroCheckInFight(Hero hero){
@@ -203,19 +229,19 @@ public class Quest{
 	public void openItemMenu(){
 		String heroTipsStr = "Select whose items?[0-"+ ((theHeros.length)-1) + "], press other keys to return:";
 		String errorStr = "Invalid input.";
-		while(true){
+		do{
 			System.out.print(heroTipsStr);
 			if(!(scan.hasNextInt())){
 				return;
 			}
-		int heroNum = scan.nextInt();
+			int heroNum = scan.nextInt();
 			if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
 				System.out.println(errorStr);
 				continue;
 			}
-		System.out.print("For " + theHeros[heroNum].getName() + ", [A]Armor [P]Potion [W]weapon, press other keys to return:");
-		String input = scan.next();
-		if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){ 
+			System.out.print("For " + theHeros[heroNum].getName() + ", [A]Armor [P]Potion [W]weapon, press other keys to return:");
+			String input = scan.next();
+			if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){ 
 				//Open the armor menu.
 				secondItemMenu(theHeros[heroNum],1);
 				return;
@@ -228,8 +254,35 @@ public class Quest{
 				secondItemMenu(theHeros[heroNum],0);
 				return;
 			}
-		return;
-		}
+			return;
+		}while(true);
+		// while(true){
+		// 	System.out.print(heroTipsStr);
+		// 	if(!(scan.hasNextInt())){
+		// 		return;
+		// 	}
+		// int heroNum = scan.nextInt();
+		// 	if(heroNum < 0 || heroNum > ((theHeros.length)-1)){
+		// 		System.out.println(errorStr);
+		// 		continue;
+		// 	}
+		// System.out.print("For " + theHeros[heroNum].getName() + ", [A]Armor [P]Potion [W]weapon, press other keys to return:");
+		// String input = scan.next();
+		// if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){ 
+		// 		//Open the armor menu.
+		// 		secondItemMenu(theHeros[heroNum],1);
+		// 		return;
+		// 	}else if (input.charAt(0) == 'P' || input.charAt(0) == 'p'){
+		// 		//Open the potion menu.
+		// 		secondItemMenu(theHeros[heroNum],2);
+		// 		return;
+		// 	}else if(input.charAt(0) == 'W' || input.charAt(0) == 'w'){
+		// 		//Select the item menu.
+		// 		secondItemMenu(theHeros[heroNum],0);
+		// 		return;
+		// 	}
+		// return;
+		// }
 	}
 
 	public void openSingleItemMenu(Hero hero){
@@ -256,7 +309,7 @@ public class Quest{
 		List<Item> tmpList = hero.getList(i);
 		if(hero.checkShowAnyItem(tmpList)){
 			String errorStr = "Invalid input.";
-			while(true){
+			do{
 				System.out.print("Choose one item to use(equip) [0-"+(tmpList.size()-1) + "], press other keys to return:");
 				if(!(scan.hasNextInt())){
 					return;
@@ -269,7 +322,21 @@ public class Quest{
 				if(hero.useItem(tmpList.get(itemNum)))
 					hero.removeItem(tmpList, itemNum);
 				return;
-			}
+			}while(true);
+			// while(true){
+			// 	System.out.print("Choose one item to use(equip) [0-"+(tmpList.size()-1) + "], press other keys to return:");
+			// 	if(!(scan.hasNextInt())){
+			// 		return;
+			// 	}
+			// 	int itemNum = scan.nextInt();
+			// 	if(itemNum < 0 || itemNum > (tmpList.size()-1)){
+			// 		System.out.println(errorStr);
+			// 		continue;
+			// 	}
+			// 	if(hero.useItem(tmpList.get(itemNum)))
+			// 		hero.removeItem(tmpList, itemNum);
+			// 	return;
+			// }
 		}else
 			return;
 	}
@@ -298,7 +365,7 @@ public class Quest{
 		String tipsInFight = "Hero can't pass a monster. Try another action:";
 		String tipsOutFight = "There is no monster nearby. Try another action:";
 		herosMove = false;
-		while(true){
+		do{
 			String input = scan.next();
 			if (input.charAt(0) == 'Q' || input.charAt(0) == 'q'){ 
 				//Quit the game.
@@ -327,10 +394,16 @@ public class Quest{
 			}else if (input.charAt(0) == 'T' || input.charAt(0) == 't'){
 				//Hero teleports.
 				System.out.print("Teleport to which lane?[1-3]:");
-				while(!(scan.hasNextInt())) {
+				do{
+					if(scan.hasNextInt())
+						break;
 					System.out.print("Invalid input, must be [1-3], try again:");
 					scan.next();
-				}
+				}while(!(scan.hasNextInt()));
+				// while(!(scan.hasNextInt())) {
+				// 	System.out.print("Invalid input, must be [1-3], try again:");
+				// 	scan.next();
+				// }
 				int inputLane = scan.nextInt();
 				switch(inputLane){
 					case 1:
@@ -456,7 +529,7 @@ public class Quest{
 				System.out.print(tipsInvalid);
 				continue;
 			}
-		}
+		}while(true);
 	}
 
 	public boolean getGameContinue(){

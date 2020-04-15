@@ -89,6 +89,22 @@ public abstract class Hero extends Creatures implements Attack{
 		System.out.println(" Cause " + realDamage + " damage to " + monster.getName() + ".");
 	}
 
+	public void spellAttack(Monster monster, Spell spell){
+		this.addMana(-1*(spell.getCostMana()));
+		int realDamage = (int)((((float)(this.getDexterity())/10000)+1)*spell.getDamage());
+		//The spell damage is the real damage.
+		if(realDamage >= monster.getHp()){
+			//Beat the monster, the damage overflow.
+			realDamage = monster.getHp();
+			monster.addHp( -1 * realDamage);
+			System.out.print(" Cause " + realDamage + " damage to " + monster.getName() + ". ");
+			return;
+		}
+		monster.addHp( -1 * realDamage);
+		System.out.print(" Cause " + realDamage + " damage to " + monster.getName() + ". ");
+		spell.deterioration(monster);
+	}
+
 
 	public void sellItem(int i){
 		List<Item> itemList = this.getList(i);
@@ -96,7 +112,7 @@ public abstract class Hero extends Creatures implements Attack{
 			String sellTipsStr = "Choose one to sell, using its sequence number [0-" + (itemList.size()-1) + "], press other keys to return:";
 			String errorStr = "Invalid input.";
 			Scanner scan = new Scanner(System.in);
-			while(true){
+			do{
 				System.out.print(sellTipsStr);
 				if(!(scan.hasNextInt())){
 					return;
@@ -114,7 +130,7 @@ public abstract class Hero extends Creatures implements Attack{
 				System.out.println(name + " sell the " + sellItem.getName() + "!");
 				this.addMoney(sellItem.getPrice()/2);
 				return;
-			}
+			}while(true);
 		}
 	}
 

@@ -4,6 +4,7 @@ public class Fight{
 	int continueFlag; // "2" represents fight continue, "1" means heros win, "0" means monsters win. 
 	private Hero singleHero;
 	private Monster singleMonster;
+	static Scanner scan = new Scanner(System.in);
 
 	public Fight(Hero hero, Monster monster){
 		singleHero = hero;
@@ -22,8 +23,7 @@ public class Fight{
 	}
 
 	public void singleHeroDo(){
-		Scanner scan = new Scanner(System.in);
-		while(true){
+		do{
 			String input = scan.next();
 			if (input.charAt(0) == 'A' || input.charAt(0) == 'a'){
 				if(!singleMonster.isDead()){
@@ -36,7 +36,7 @@ public class Fight{
 				return;
 			}else if (input.charAt(0) == 'S' || input.charAt(0) == 's'){
 				if(singleHero.checkEnoughManaAnySpell() && singleHero.showLearnedSpell()){
-					while(true){
+					do{
 						System.out.print("Choose which spell to cast [0-" + (singleHero.getLearnSpellNum()-1) + "]:");
 						if(!scan.hasNextInt()){
 							System.out.print("Invalid input. ");
@@ -53,7 +53,8 @@ public class Fight{
 						Spell useSpell = singleHero.getSingleSpell(spellNum);
 						if(singleMonster.getHp()>0){
 							System.out.print(singleHero.getName() + " casts " + useSpell.getName() + " to " + singleMonster.getName() + ".");
-							this.heroSpellMonster(singleHero, singleMonster, useSpell);
+							// this.heroSpellMonster(singleHero, singleMonster, useSpell);
+							singleHero.spellAttack(singleMonster, useSpell);
 							if(singleMonster.getHp()== 0){
 								System.out.println(singleMonster.getName() + " was defeated!");
 							}
@@ -61,7 +62,8 @@ public class Fight{
 						else{
 							if(!singleMonster.isDead()){
 								System.out.print(singleHero.getName() + " casts " + useSpell.getName() + " to " + singleMonster.getName() + ".");
-								this.heroSpellMonster(singleHero, singleMonster, useSpell);
+								// this.heroSpellMonster(singleHero, singleMonster, useSpell);
+								singleHero.spellAttack(singleMonster, useSpell);
 								if(singleMonster.getHp()== 0){
 									System.out.println(singleMonster.getName() + " was defeated!");	
 								}
@@ -69,7 +71,7 @@ public class Fight{
 							}
 						}
 						return;
-					}
+					}while(true);
 				}
 				else
 					System.out.print("[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
@@ -93,7 +95,7 @@ public class Fight{
 				System.out.print("Invalid action. Try again:[A]Attack [S]Spell [P]Potion [W]Weapon [R]Armor:");
 				continue;
 			}
-		}
+		}while(true);
 	
 	}
 
@@ -118,8 +120,7 @@ public class Fight{
 		List<Item> itemList = hero.getList(i);
 		if(hero.checkShowAnyItem(itemList)){
 			String errorStr = "Invalid input.";
-			Scanner scan = new Scanner(System.in);
-			while(true){
+			do{
 				System.out.print("Choose one item to use(equip) [0-"+(itemList.size()-1) + "], press other keys to return:");
 				if(!(scan.hasNextInt()))
 					return false;
@@ -135,59 +136,10 @@ public class Fight{
 				if(hero.useItem(itemList.get(itemNum)))
 					hero.removeItem(itemList, itemNum);
 				return true;
-			}
+			}while(true);
 		}
 		return false;
 	}
-
-	public void heroSpellMonster(Hero hero, Monster monster, Spell spell){
-		hero.addMana(-1*(spell.getCostMana()));
-		int realDamage = (int)((((float)(hero.getDexterity())/10000)+1)*spell.getDamage());
-		//The spell damage is the real damage.
-		if(realDamage >= monster.getHp()){
-			//Beat the monster, the damage overflow.
-			realDamage = monster.getHp();
-			monster.addHp( -1 * realDamage);
-			System.out.print(" Cause " + realDamage + " damage to " + monster.getName() + ". ");
-			return;
-		}
-		monster.addHp( -1 * realDamage);
-		System.out.print(" Cause " + realDamage + " damage to " + monster.getName() + ". ");
-		spell.deterioration(monster);
-	}
-
-
-	// public void singleFight(){
-	// 	while(continueFlag == 2){
-	// 		System.out.println("-------------------------------------------------------------------------");
-	// 		this.showStatus();
-	// 		System.out.println("-------------------------------------------------------------------------");
-	// 		this.herosTurn();
-	// 		if(continueFlag != 2){
-	// 			System.out.println("-------------------------------------------------------------------------");
-	// 			this.fightReward();
-	// 			System.out.println("-------------------------------------------------------------------------");
-	// 			break;
-	// 		}
-	// 		System.out.println("-------------------------------------------------------------------------");
-	// 		this.monsterTurn();
-	// 		if(continueFlag != 2){
-	// 			this.fightPenalty();
-	// 			System.out.println("-------------------------------------------------------------------------");
-	// 			break;
-	// 		}
-	// 		this.herosRegain();
-	// 	}
-	// }
-
-	// public void herosRegain(){
-	// 	for(int i = 0; i < vsNum ; i ++ ){
-	// 		if(heroSurvive[i] == 1){
-	// 			theHeros[i].addHp((int)(theHeros[i].getHp()*0.05));
-	// 			theHeros[i].addMana((int)(theHeros[i].getMana()*0.05));
-	// 		}
-	// 	}
-	// }
 
 	public void fightReward(){
 		if(singleHero.getHp()>0){

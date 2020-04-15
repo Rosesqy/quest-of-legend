@@ -22,37 +22,65 @@ public class Pub{
 			String str;
 			String line[];
 			bf.readLine();
+			str = bf.readLine();
 			int i = 0;
-			while ((str = bf.readLine()) != null) {
+			do{
+				if (str == null)
+					break;
 				line = str.split("\\s+");
 				phero = new Paladin(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]),Integer.parseInt(line[5]),Integer.parseInt(line[6]),0);
 				paladinList[i] = phero;
 				i ++;
-			}
+			}while((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	phero = new Paladin(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]),Integer.parseInt(line[5]),Integer.parseInt(line[6]),0);
+			// 	paladinList[i] = phero;
+			// 	i ++;
+			// }
 			ir.close();
 			is = new FileInputStream("The_Quest/Warriors.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
+			str = bf.readLine();
 			i = 0;
-			while ((str = bf.readLine()) != null) {
+			do{
+				if (str == null)
+					break;
 				line = str.split("\\s+");
 				phero = new Warrior(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]),Integer.parseInt(line[5]),Integer.parseInt(line[6]),0);
 				warriorList[i] = phero;
 				i ++;
-			}
+			}while((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	phero = new Warrior(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]),Integer.parseInt(line[5]),Integer.parseInt(line[6]),0);
+			// 	warriorList[i] = phero;
+			// 	i ++;
+			// }
 			i = 0;
 			ir.close();
 			is = new FileInputStream("The_Quest/Sorcerers.txt");
 			ir = new InputStreamReader(is);
 			bf = new BufferedReader(ir);
 			bf.readLine();
-			while ((str = bf.readLine()) != null) {
+			str = bf.readLine();
+			i = 0;
+			do{
+				if (str == null)
+					break;
 				line = str.split("\\s+");
 				phero = new Sorcerer(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]),Integer.parseInt(line[5]),Integer.parseInt(line[6]),0);
 				sorcererList[i] = phero;
 				i ++;
-			}
+			}while((str = bf.readLine()) != null);
+			// while ((str = bf.readLine()) != null) {
+			// 	line = str.split("\\s+");
+			// 	phero = new Sorcerer(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]),Integer.parseInt(line[5]),Integer.parseInt(line[6]),0);
+			// 	sorcererList[i] = phero;
+			// 	i ++;
+			// }
 			bf.close();
 			ir.close();
 		} catch (IOException e){
