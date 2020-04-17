@@ -12,15 +12,6 @@ public class Market{
 
 	static 	Scanner scan = new Scanner(System.in);
 
-	// Market(Hero[] heros){
-	// 	spellList = new ArrayList<Spell>();
-	// 	weaponList = new ArrayList<Item>();
-	// 	armorList = new ArrayList<Item>();
-	// 	potionList = new ArrayList<Item>();
-	// 	theHeros = heros;
-	// 	this.initial();
-	// }
-
 	public Market(){
 		spellList = new ArrayList<Spell>();
 		weaponList = new ArrayList<Item>();
@@ -28,7 +19,6 @@ public class Market{
 		potionList = new ArrayList<Item>();
 		this.initial();
 	}
-
 
 	public void initial(){
 		Spell pspell;
@@ -247,35 +237,16 @@ public class Market{
 				continue;
 			}
 			Item buyItem = itemList.get(buyNum);
-			if(this.heroBuyItem(hero, buyItem)){
+			// if(this.heroBuyItem(hero, buyItem)){
+			if(buyItem.buyable(hero)){
 				System.out.println(hero.getName() + " buy " + buyItem.getName() + "!");
 				hero.addMoney(-1*buyItem.getPrice());
-				itemList.remove(buyNum);
+				// itemList.remove(buyNum);
 				buyItem.addToHero(hero);				
 			}
 			System.out.println("-------------------------------------------------------------------------");
 			continue;
 		}while(true);
-	}
-
-	public boolean heroBuyItem(Hero hero, Item item){
-		if(item.ownedByHero(hero)){
-			System.out.println(hero.getName()+" has owned a" + item.getName() +".");
-			return false;
-		}
-		int heroLevel = hero.getLevel();
-		int requiredLevel = item.getRequiredLevel();
-		if(heroLevel < requiredLevel){
-			System.out.println(hero.getName()+" has not reached level " + requiredLevel +", can't buy the " + item.getName() + ".");
-			return false;
-		}
-		int heroMoney = hero.getMoney();
-		int price = item.getPrice();
-		if(heroMoney < price){
-			System.out.println(hero.getName()+" doesn't have enough coins to buy the item.");
-			return false;
-		}
-		return true;
 	}
 
 	public void buySpell(Hero hero){
