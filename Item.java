@@ -62,7 +62,31 @@ public class Item implements Sellable, Buyable{
 
 	}
 
+	public boolean levelEnough(Hero h){
+		return h.getLevel() >= this.requiredLevel;
+	}
+
+	public boolean moneyEnough(Hero h){
+		return h.getMoney() >= this.price;
+	}
+
 	public boolean ownedByHero(Hero hero){
 		return false;
+	}
+
+	public boolean buyable(Hero hero){
+		if(this.ownedByHero(hero)){
+			System.out.println(hero.getName()+" has owned a" + this.getName() +".");
+			return false;
+		}
+		if(!this.levelEnough(hero)){
+			System.out.println(hero.getName()+" has not reached level " + this.getRequiredLevel() +", can't buy the " + this.getName() + ".");
+			return false;
+		}
+		if(!this.moneyEnough(hero)){
+			System.out.println(hero.getName()+" doesn't have enough coins to buy the item.");
+			return false;
+		}
+		return true;
 	}
 }

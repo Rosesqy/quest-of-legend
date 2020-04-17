@@ -32,7 +32,6 @@ public abstract class Hero extends Creatures implements Attack{
 		weaponDamage = 0;
 		heroIdx = hIdx;
 		x = 7;
-		// y = 0;
 	}
 
 	public int getHeroIdx(){
@@ -217,6 +216,7 @@ public abstract class Hero extends Creatures implements Attack{
 
 	public void gotWeapon(Item item){
 		ownedWeapon.add(item);
+		this.addWeaponDamage(item.getValue());
 	}
 
 	public void gotArmor(Item item){
