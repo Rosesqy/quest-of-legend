@@ -17,6 +17,7 @@ public class Weapon extends Item{
 		System.out.println(hero.getName() + " unequipped the " + name + ".\nWeapon damage changes:" + oriWeaponDamage + "=>" + hero.getWeaponDamage());
 	}
 
+
 	public boolean beUsed(Hero hero){	
 		int oriWeaponDamage = hero.getWeaponDamage();
 		if (equipped){
