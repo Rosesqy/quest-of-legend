@@ -1,4 +1,4 @@
-public class Spell implements Sellable, Buyable{
+public class Spell implements Buyable{
 //A class represents the spells which heros can cast.
 	protected String name;
 	protected int price;
@@ -40,5 +40,30 @@ public class Spell implements Sellable, Buyable{
 
 	public void deterioration(Monster monster){
 	//Each spell will reduce one of the monster's skill.
+		
+	}
+
+	public boolean moneyEnough(Hero h){
+		return h.getMoney() >= this.price;
+	}
+
+	public boolean levelEnough(Hero h){
+		return h.getLevel() >= this.requiredLevel;
+	}
+
+	public boolean buyable(Hero hero){
+		if (hero.checkLearnedSpell(this)){
+			System.out.println(hero.getName()+" has learned " + this.getName() +".");
+			return false;
+		}
+		if(!this.levelEnough(hero)){
+			System.out.println(hero.getName()+" has not reached level " + requiredLevel +", can't learn the " + this.getName() + ".");
+			return false;
+		}
+		if(!this.moneyEnough(hero)){
+			System.out.println(hero.getName()+" doesn't have enough coins to learn the this.");
+			return false;
+		}
+		return true;
 	}
 }
